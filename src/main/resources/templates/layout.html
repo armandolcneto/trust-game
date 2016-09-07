@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="despachoApp">
+
+<head>
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>Trust Game</title>
+
+<!-- JavaScript -->
+<script th:src="@{/js/jquery.js}" />
+<script th:src="@{/js/bootstrap.js}" />
+<script th:src="@{/js/angular.min.js}" />
+<script th:src="@{/js/angular-animate.min.js}" />
+<script th:src="@{/js/homeController.js}" />
+<script th:src="@{/js/respond.js}" />
+<script th:src="@{/js/spin.js}"/>
+<script th:src="@{/js/angular-spinner.js}"/>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" th:href="@{/css/bootstrap_ms.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body role="document">
+	<header>
+		<div class="topo">
+			<div class="container">
+				<div class="">
+					<h1> TRUST GAME</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="container" role="main">
+		<div layout:fragment="content" />
+	</div>
+
+	<footer id="colophon">
+		<div class="bg-footer-menu">
+		</div>
+	</footer>
+	
+</body>
+
+</html>
