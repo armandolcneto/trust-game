@@ -28,28 +28,25 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "x_usr")
+@Table(name = "usuario")
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 3317339439073208844L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pk_x_usr", nullable = false, updatable = false)
+	@Column(name = "pk_usuario", nullable = false, updatable = false)
 	private Long id;
 
 	@Column(name = "login", nullable = false, unique = true)
 	private String username;
-
-	@Column(name = "name", nullable = false, unique = true)
-	private String name;
 
 	@Column(name = "password", nullable = false)
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "x_tela_usr", joinColumns = {
-			@JoinColumn(name = "fk_x_usr", referencedColumnName = "pk_x_usr") }, inverseJoinColumns = {
+			@JoinColumn(name = "fk_x_usr", referencedColumnName = "pk_usuario") }, inverseJoinColumns = {
 					@JoinColumn(name = "fk_x_tela", referencedColumnName = "pk_x_tela") })
 	private List<Tela> telas;
 
@@ -59,14 +56,6 @@ public class Usuario implements UserDetails {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override
