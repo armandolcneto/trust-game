@@ -8,14 +8,14 @@
 		<div ng-controller="jogadorCtrl" class="container meio">
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum erro, tente novamente.</p>	
     		<div class="pageTitle col-md-12">
-    	 		<h2>Trust Game</h2>
+    	 		<h2>Trust Game Cadastro do Jogador</h2>
     		</div>  
     		<div class="instrucoes">
-    			<p>
+    			<p></p>
     		</div>		
 		  
 	    	<div>
-			  <form novalidate class="simple-form">
+			  <form name="form" th:action="@{/cadastroJogador}" action="/login" method="POST">
 			    Nome: <input type="text" ng-model="jogador.nome" /><br />
 			    Data de Nascimento: <input type="text" ng-model="jogador.dataNascimento" /><br />
 			    Sexo: <input type="radio" ng-model="jogador.sexo" value="m" />Masculino
@@ -25,9 +25,9 @@
 			    	<input type="submit" ng-click="update(novoExperimento)" value="Save" />
 			    </div><br/>
 			    
-			    Tempo de Experiência Profissional: <input type="text" ng-model="jogador.experiencia" /><br />
-			    Formação Acadêmica: <input type="text" ng-model="jogador.formacaoAcademica" /><br />
-			    Atuação Profissional: <input type="text" ng-model="jogador.atuacaoProfissional" /><br />
+			    Tempo de Experi&ecirc;ncia Profissional: <input type="text" ng-model="jogador.experiencia" /><br />
+			    Forma&ccedil;&atilde;o Acad&ecirc;mica: <input type="text" ng-model="jogador.formacaoAcademica" /><br />
+			    Atua&ccedil;&atilde;o Profissional: <input type="text" ng-model="jogador.atuacaoProfissional" /><br />
 			  </form>
 			</div>
 	    	<table ng-show="experimentos.length">
@@ -39,7 +39,6 @@
 			</table>
 	  	</div>
 	</div>
-</div>
 
 </body>
 </html>

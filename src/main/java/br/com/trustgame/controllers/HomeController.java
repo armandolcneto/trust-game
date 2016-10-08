@@ -24,6 +24,24 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping("/admin")
+	public ModelAndView admin() {
+		mav = new ModelAndView("pages/admin");
+		return mav;
+	}
+	
+	@RequestMapping("/cadastroJogador")
+	public ModelAndView cadastroJogador() {
+		mav = new ModelAndView("pages/cadastroJogador");
+		return mav;
+	}
+	
+	@RequestMapping("/jogador")
+	public ModelAndView jogador() {
+		mav = new ModelAndView("pages/jogador");
+		return mav;
+	}
+	
 	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		return "pages/home";
