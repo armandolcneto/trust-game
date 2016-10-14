@@ -1,56 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="trustGameApp">
+<html lang="pt-br" ng-app="trustGameApp">
 
 <head>
+	
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<title>Trust Game</title>
 
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+	<!-- JavaScript -->
+	<script th:src="@{/js/jquery.js}"></script>
+	<script th:src="@{/js/bootstrap.js}"></script>
+	<script th:src="@{/js/angular.js}"></script>
+	<script th:src="@{/js/angular-animate.min.js}"></script>
+	<!-- socket -->
+	<script src="//cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<!--end  -->
+	<script th:src="@{/js/main.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+	<script th:src="@{/js/spin.js}"></script>
+	<script th:src="@{/js/bower_components/angular-spinner/angular-spinner.js}"></script>
+	<script th:src="@{/js/homeController.js}"></script>
+	<script th:src="@{/js/adminCtrl.js}"></script>
+	<script th:src="@{/js/jogadorCtrl.js}"></script>
+	<script th:src="@{/js/cadastroJogadorCtrl.js}"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
 
-<title>Trust Game</title>
-
-<!-- JavaScript -->
-<script th:src="@{/js/jquery.js}" />
-<script th:src="@{/js/bootstrap.js}" />
-<script th:src="@{/js/angular.min.js}" />
-<script th:src="@{/js/angular-animate.min.js}" />
-<script th:src="@{/js/homeController.js}" />
-<script th:src="@{/js/respond.js}" />
-<script th:src="@{/js/spin.js}"/>
-<script th:src="@{/js/angular-spinner.js}"/>
-<script th:src="@{/js/adminCtrl.js}" />
-<script th:src="@{/js/jogadorCtrl.js}" />
-
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet" th:href="@{/css/bootstrap_ms.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css" />
-
+	
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap_ms.css}" />
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css" />
+	
 </head>
 
 <body role="document">
 	<header>
 		<div class="topo">
 			<div class="container">
-				<div class="">
-					<h1> TRUST GAME</h1>
-				</div>
+				<img th:src="@{/images/image.png}"/>
+				<a class="pull-right voltar">VOLTAR</a>
 			</div>
 		</div>
+		<div class="bg-menu">
+		<div class="container">
+			<nav class="navbar menu-navbar">
+				  <div>
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				     <!-- <a class="navbar-brand" href="#"></a> -->
+			    	</div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			        <li><a th:href="@{/home.html}">Home</a></li>
+			        <li><a th:href="@{/admin.html}">Administração</a></li>
+			        <li><a th:href="@{/cadastroJogador.html}">Cadastro do Jogador</a></li>
+			        <li><a th:href="@{/jogador.html}">Jogador</a></li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+		</nav>
+	</div>
+	</div>
 	</header>
-
-
+	
+	
 	<div class="container" role="main">
+		<div layout:fragment="header" />
 		<div layout:fragment="content" />
 	</div>
 
-	<footer id="colophon">
-		<div class="bg-footer-menu">
-		</div>
-	</footer>
-	
 </body>
-
 </html>

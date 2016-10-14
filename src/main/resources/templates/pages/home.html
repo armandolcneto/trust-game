@@ -5,64 +5,49 @@
 
 	<body class="page">
 	
-		<div id="controller" class="col-md-12" layout:fragment="content" ng-controller="homeController">
+		<div id="controller" class="col-md-12" layout:fragment="content" ng-controller="HomeController">
+			<div class="pageTitle col-md-12">
+				<h2>TRUST GAME</h2>
+			</div>
+			<!-- Caixa de mensagem -->
 	
-				<div class="pageTitle col-md-12">
-					<h2>TRUST GAME</h2>
-				</div>
-				<div id="spin" class="alert">
-					<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
-				</div>
-				<div class="alert alert-success fade in" style="height: 50px; margin-top: 75px;" ng-show="mostrarSucesso">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				    <strong>Sucesso!</strong> Os despachos referentes aos processos selecionados foram assinados.
-				    
-			  	</div>
-			  	
-				
-				<div class="col-md-12 dashboardChart-white_border">
-				
-					<div class="col-md-12 form-group">
-						<div class="col-md-1"><label for="filtro">Buscar</label></div>
-					  	<div class="col-md-5"><input ng-model="filtro" type="search" id="filtro" class="form-control"/></div>
-					 </div>
-
-					<div class="btn-group btn-group-xs" role="group" aria-label="...">
-						<button class=" btn btn-default botao-barra-acao todos" ng-click="checkAll();">Todos</button>
-						<button class=" btn btn-default botao-barra-acao todos" ng-show="isCheck" ng-click="unCheckAll();">Limpar</button>
-					</div>
-					<button class="col-md-2 btn btn-default pull-right botao-barra-acao" ng-show="habilitaImprimir();" ng-click="imprimir();">Imprimir</button>
-					<button class="col-md-2 btn btn-default pull-right botao-barra-acao" ng-show="isCheck" ng-click="assinarDespacho();">Despachar</button>
-					<p><label  class="col-md-2center-block botao-barra-acao" >Voc&ecirc; selecionou {{qtdMarcados}} de {{instrumentos.length}}</label></p>
-				</div>
-				 
- 				
-				<div class="col-md-12 item-box" ng-repeat="inst in instrumentos | limitTo: numTermos | filter: filtro">
-					<div class="checkbox-div" >
-						<input class="center-block" type="checkbox" ng-model="inst.check" ng-click="existeMarcado()" ng-checked="inst.check" />
-			      	</div>
-			      	<div class="dados-div">
-						<div class="col-md-6 info-text-left">
-
-							<span class="col-md-12 info-header">N&deg; do Termo</span>
-							<p>{{inst.numero}}</p>
-						</div>
-						<div class="col-md-6 info-text-right">
-							<span class="col-md-12 info-header">N&deg; do Processo</span>
-							<p>{{inst.numeroprocesso}}</p>
-						</div>
-						<div class="col-md-12 info-text-low">
-							<span class="col-md-12 info-header" >T&iacute;tulo do Processo</span>
-							<p>{{inst.titulo}}</p>
-						</div>
-			    	</div>
-				</div>
-				<div class="col-md-12 dashboardChart-white_border listar-mais">
-					<button class="col-md-1 btn btn-default btn-listar-mais center-block" ng-click="iteraTermos();">LISTAR MAIS(10)</button>
-	      		</div>
-	
+			<div id="main-content" class="container">
+			    <div class="row">
+			        <div class="col-md-6">
+			            <form class="form-inline">
+			                <div class="form-group">
+			                    <label for="connect">WebSocket connection:</label>
+			                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+			                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+			                    </button>
+			                </div>
+			            </form>
+			        </div>
+			        <div class="col-md-6">
+			            <form class="form-inline">
+			                <div class="form-group">
+			                    <label for="name">What is your name?</label>
+			                    <input type="text" id="name" class="form-control" placeholder="Your name here..." />
+			                </div>
+			                <button id="send" class="btn btn-default" type="submit">Send</button>
+			            </form>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <table id="conversation" class="table table-striped">
+			                <thead>
+			                <tr>
+			                    <th>Greetings</th>
+			                </tr>
+			                </thead>
+			                <tbody id="greetings"></tbody>
+			            </table>
+			        </div>
+			    </div>
+			</div>
+			<!-- Final -->
 		</div>
-		
 	</body>
 	
 </html>

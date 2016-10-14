@@ -5,17 +5,19 @@
 <body role="document" class="page" >
 
 	<div class="container" role="main" layout:fragment="content">
-		<div ng-controller="jogadorCtrl" class="container meio">
+		<div ng-controller="cadastroJogadorCtrl" class="container meio">
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum erro, tente novamente.</p>	
     		<div class="pageTitle col-md-12">
-    	 		<h2>Trust Game</h2>
+    	 		<h2>Trust Game Cadastro do Jogador</h2>
     		</div>  
     		<div class="instrucoes">
-    			<p>
+    			<p></p>
     		</div>		
 		  
-	    	<div class="form-dados-pessoais">
-			  <form novalidate class="simple-form">
+	    	<div>
+			  <form name="form" th:action="@{/cadastroJogador}" action="/login" method="POST">
+			  <div class="form-group col-md-6">
+
 			    Nome: <input type="text" ng-model="jogador.nome" /><br />
 			    Data de Nascimento: <input type="text" ng-model="jogador.dataNascimento" /><br />
 			    Sexo: <input type="radio" ng-model="jogador.sexo" value="m" />Masculino
@@ -25,15 +27,19 @@
 			    	<input type="submit" ng-click="update(novoExperimento)" value="Save" />
 			    </div><br/>
 			    
-			    Tempo de Experiência Profissional: <input type="text" ng-model="jogador.experiencia" /><br />
-			    Formação Acadêmica: <input type="text" ng-model="jogador.formacaoAcademica" /><br />
-			    Atuação Profissional: <input type="text" ng-model="jogador.atuacaoProfissional" /><br />
+			    Tempo de Experi&ecirc;ncia Profissional: <input type="text" ng-model="jogador.experiencia" /><br />
+			    <label class="requerido">Forma&ccedil;&atilde;o Acad&ecirc;mica:</label>
+					 <select class="form-control" ng-model="formacaoAcademica"
+                     ng-options="formacao.nome for formacao in formacoes track by formacao.id"/>
+                <label class="requerido">Atua&ccedil;&atilde;o Profissional:</label>
+					 <select class="form-control" ng-model="atuacaoProfissional"
+                     ng-options="atuacao.nome for atuacao in atuacoes track by atuacao.id"/>
+			   </div> 
 			  </form>
 			</div>
 
 	  	</div>
 	</div>
-</div>
 
 </body>
 </html>

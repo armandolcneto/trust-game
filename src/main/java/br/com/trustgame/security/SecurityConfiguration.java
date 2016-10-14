@@ -24,15 +24,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().csrfTokenRepository(csrfTokenRepository());
-
-		HttpSecurity httpSecurity = http.authorizeRequests()
-				.antMatchers("/buscarInstrumentos", "/images/*", "/css/*", "/js/*").permitAll().anyRequest()
-				.fullyAuthenticated().and();
-		httpSecurity = httpSecurity.formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and();
-		httpSecurity = httpSecurity.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and();
-		httpSecurity = httpSecurity.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class).csrf().and();
+//		http.csrf().csrfTokenRepository(csrfTokenRepository());
+//
+//		HttpSecurity httpSecurity = http.authorizeRequests()
+//				.antMatchers("/buscarInstrumentos", "/images/*", "/css/*", "/js/*").permitAll().anyRequest()
+//				.fullyAuthenticated().and();
+//		httpSecurity = httpSecurity.formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and();
+//		httpSecurity = httpSecurity.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.logoutSuccessUrl("/").and();
+//		httpSecurity = httpSecurity.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class).csrf().and();
 
 	}
 

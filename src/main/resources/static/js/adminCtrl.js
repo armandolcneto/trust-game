@@ -1,6 +1,4 @@
-'use strict'
-var app = angular.module('trustGameApp',[]);
-app.controller('adminCtrl', function($scope, $http) {
+angular.module("trustGameApp").controller("adminCtrl",function($scope,$http,$location){
 	
   
 	$scope.experimentos = [];
