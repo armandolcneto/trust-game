@@ -14,7 +14,7 @@
     			<p>
     		</div>		
 		  
-	    	<div>
+	    	<div class="form-dados-pessoais">
 			  <form novalidate class="simple-form">
 			    Nome: <input type="text" ng-model="jogador.nome" /><br />
 			    Data de Nascimento: <input type="text" ng-model="jogador.dataNascimento" /><br />
@@ -30,13 +30,7 @@
 			    Atuação Profissional: <input type="text" ng-model="jogador.atuacaoProfissional" /><br />
 			  </form>
 			</div>
-	    	<table ng-show="experimentos.length">
-				<tr ng-repeat="experimento in experimentos | orderBy : 'id'">
-					<td ng-hide="true">{{ experimento.id }}</td>
-					<td>{{ experimento.nome }}</td>
-					<td>{{ experimento.status }}</td>
-				</tr>
-			</table>
+
 	  	</div>
 	</div>
 </div>
