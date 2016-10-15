@@ -2,20 +2,20 @@ package br.com.trustgame.model;
 
 public class Menssagem {
 
-    private String name;
+    private String valorEnviado;
 
     public Menssagem() {
     }
 
-    public Menssagem(String name) {
-        this.name = name;
+    public Menssagem(String valorEnviado) {
+        this.valorEnviado = valorEnviado;
     }
 
-    public String getName() {
-        return name;
+    public String getvalorEnviado() {
+        return valorEnviado;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String valorEnviado) {
+        this.valorEnviado = valorEnviado;
     }
 }

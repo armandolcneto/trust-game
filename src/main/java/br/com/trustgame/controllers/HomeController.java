@@ -29,14 +29,14 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String root(Map<String, Object> model) {
-		return "redirect:/home";
+		return "redirect:/admin";
 	}
 
-	@RequestMapping("/home")
-	public ModelAndView home() {
-		mav = new ModelAndView("pages/home");
-		return mav;
-	}
+//	@RequestMapping("/home")
+//	public ModelAndView home() {
+//		mav = new ModelAndView("pages/home");
+//		return mav;
+//	}
 	
 	@RequestMapping("/admin")
 	public ModelAndView admin() {
