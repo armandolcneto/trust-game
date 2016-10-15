@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.trustgame.model.AtuacaoProfissional;
 import br.com.trustgame.model.FormacaoAcademica;
+import br.com.trustgame.model.Usuario;
 import br.com.trustgame.service.AtuacaoProfissionalService;
 import br.com.trustgame.service.FormacaoAcademicaService;
 
@@ -68,22 +71,22 @@ public class HomeController {
 		return atuacaoProfissionalService.getAll();
 	}
 	
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
-		return "pages/home";
-	}
+//	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String index() {
+//		return "pages/home";
+//	}
 	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(ModelMap model) {
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	       Usuario user=null;
-	        if (principal instanceof Usuario) {
-	        user = ((Usuario)principal);
-	        }
-	     
-	    String name = user.getUsername();
-	    model.addAttribute("username", name);
-	    model.addAttribute("message", "Welcome to the secured page");
-		return "pages/home";
-	}*/
+//	@RequestMapping(value = "/home", method = RequestMethod.GET)
+//	public String home(ModelMap model) {
+//		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	       Usuario user=null;
+//	        if (principal instanceof Usuario) {
+//	        user = ((Usuario)principal);
+//	        }
+//	     
+//	    String name = user.getUsername();
+//	    model.addAttribute("username", name);
+//	    model.addAttribute("message", "Welcome to the secured page");
+//		return "pages/home";
+//	}
 }

@@ -34,7 +34,7 @@ public class DadosPessoais implements Serializable{
 	private String sexo;
 	
 	@Column(name = "experiencia_profisional")
-	private String experiencia;
+	private Integer experiencia;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_formacao")
@@ -76,11 +76,11 @@ public class DadosPessoais implements Serializable{
 		this.sexo = sexo;
 	}
 
-	public String getExperiencia() {
+	public Integer getExperiencia() {
 		return experiencia;
 	}
 
-	public void setExperiencia(String experiencia) {
+	public void setExperiencia(Integer experiencia) {
 		this.experiencia = experiencia;
 	}
 

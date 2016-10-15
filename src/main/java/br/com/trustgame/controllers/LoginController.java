@@ -10,11 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-//	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-//	
-//	@RequestMapping("/login")
-//    public ModelAndView login(@RequestParam(required = false) String error) {
-//        LOGGER.debug("Getting login page, error={}", error);
-//        return new ModelAndView("pages/login", "error", error);
-//    }
+	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping("/login")
+    public ModelAndView login(@RequestParam(required = false) String error) {
+        LOGGER.debug("Getting login page, error={}", error);
+        return new ModelAndView("pages/login", "error", error);
+    }
 }
