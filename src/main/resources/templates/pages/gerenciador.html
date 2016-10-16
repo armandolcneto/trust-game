@@ -31,7 +31,7 @@
 						<div class="col-md-6">
 							<div class="form-inline" ng-show="tipoDoJogo">
 								<label for="ngvalueselect"> Valor a ser repassado para jogador A:  </label>
-								 <select name="ngvalueselect" ng-model="repasseJogador1" id="valorEnviado">
+								 <select class="form-control" name="ngvalueselect" ng-model="selectedJogador1" id="valorEnviado">
       								<option ng-repeat="option in optionsJogador1" ng-value="option">R$ {{option}},00</option>
    								 </select>
 							</div>
