@@ -35,11 +35,11 @@ public class HomeController {
 		return "redirect:/admin";
 	}
 
-//	@RequestMapping("/home")
-//	public ModelAndView home() {
-//		mav = new ModelAndView("pages/home");
-//		return mav;
-//	}
+	@RequestMapping("/home")
+	public ModelAndView home() {
+		mav = new ModelAndView("pages/home");
+		return mav;
+	}
 	
 	@RequestMapping("/admin")
 	public ModelAndView admin() {
