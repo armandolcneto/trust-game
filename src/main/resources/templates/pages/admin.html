@@ -11,16 +11,19 @@
     	 		<h2>Administra&ccedil;&atilde;o</h2>
     		</div>  	
 		  	<div class="center-block">
-		    	<input type="button" ng-click="novo=true" ng-show="!novo"/>
+		    	
+		    	<input class="btn btn-default center-block" type="button" ng-click="novo=true" ng-show="!novo" value="Novo Experimento"/>
 		  	</div>
-	    	<div  ng-show="novo">
+	    	<div class="col-md-6"  ng-show="novo">
 			  <form name="form" th:action="@{/admin}" action="/login" method="POST">
-			    Nome: <input type="text" ng-model="novoExperimento.nome" /><br />
-			    Tipo: <input type="radio" ng-model="novoExperimento.tipo" value="single" />Single
-			    <input type="radio" ng-model="novoExperimento.tipo" value="multiplayer" />Multiplayer<br />
+			   <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="novoExperimento.nome" /><br />
+			   <label class="control-label requerido">Tipo</label>  
+			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="single" />Experimento 1x1</label></div>
+			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="single" />Experimento 5x5</label></div>
+			    
 			    <div class="form-inline">
-			    	<input type="button" ng-click="novo=false" />
-			    	<input type="submit" ng-click="update(novoExperimento)" value="Save" />
+			    	<input class="btn btn-default" type="button" ng-click="novo=false"  value="Cancelar"/>
+			    	<input class="btn btn-default btn-primary" type="button" ng-click="update(novoExperimento)" value="Criar" />
 			    </div>
 			  </form>
 			</div>

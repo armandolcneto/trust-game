@@ -186,8 +186,11 @@ button.close{
 
 .titulo{
   color: #ffffff;
-  font-size: 24px;
+  font-size: 30px;
+  padding:0 50px;
+  vertical-align: middle;
 }
+
 .login_box{
   max-width: 295px;
   background-color: #2D3E50;
