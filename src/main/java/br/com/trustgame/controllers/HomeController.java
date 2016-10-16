@@ -59,6 +59,12 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping("/gerenciador")
+	public ModelAndView gerenciador() {
+		mav = new ModelAndView("pages/gerenciador");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.GET})
 	@ResponseBody
 	public List<FormacaoAcademica> getAll(){
