@@ -13,7 +13,7 @@
 			</div>
 
 			<div>
-				<form name="form" th:action="@{/jogador}" action="/login"
+				<form name="form" th:action="@{/gerenciador}" action="/login"
 					method="POST">
 					<div class="row">
 						<div class="col-md-6">
@@ -31,7 +31,7 @@
 						<div class="col-md-6">
 							<div class="form-inline" ng-show="tipoDoJogo">
 								<label for="ngvalueselect"> Valor a ser repassado para jogador A:  </label>
-								 <select class="form-control" name="ngvalueselect" ng-model="selectedJogador1" id="valorEnviado">
+								 <select class="form-control" name="ngvalueselect" ng-model="selectedJogador1" id="valorEnviadoB">
       								<option ng-repeat="option in optionsJogador1" ng-value="option">R$ {{option}},00</option>
    								 </select>
 							</div>
@@ -107,7 +107,7 @@
 							ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" />
 					</div>
 					<div>
-						<button id="send" class="btn btn-default" type="submit">Enviar</button>
+						<button id="sendB" class="btn btn-default" type="submit">Enviar</button>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -117,7 +117,7 @@
 										<th>Transfer&ecirc;ncias</th>
 									</tr>
 								</thead>
-								<tbody id="greetings"></tbody>
+								<tbody  ng-show="enviouB" id="greetings"></tbody>
 							</table>
 						</div>
 					</div>

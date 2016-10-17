@@ -34,7 +34,6 @@ app.service('mainService', function() {
 });
 
 app.controller('JogadorCtrl', JogadorCtrl);
-
 function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		usSpinnerService, mainService) {
 
@@ -42,16 +41,18 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 	$scope.qtdMarcados = 0;
 	$scope.isCheck = false;
 	$scope.tipoDoJogo = true;
-	$scope.optionsJogador1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+	$scope.enviouA = true;
+	$scope.enviouB = true;
+	$scope.optionsJogador1 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+			15 ];
 	$scope.repasseJogador1 = [];
-	
 
 	$scope.update = function(experimento) {
 
 	};
 
 	angular.element(document).ready(function() {
-		
+
 		$("form").on('submit', function(e) {
 			e.preventDefault();
 		});
@@ -61,8 +62,13 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		$("#disconnect").click(function() {
 			$scope.disconnect();
 		});
-		$("#send").click(function() {
-			$scope.sendName();
+		$("#sendA").click(function() {
+			$scope.sendNameA();
+			$scope.enviouA = false;
+		});
+		$("#sendB").click(function() {
+			$scope.sendNameB();
+			$scope.enviouB = false;
 		});
 	});
 
@@ -85,13 +91,16 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		$scope.stompClient.connect({}, function(frame) {
 			$scope.setConnected(true);
 			console.log('Connected: ' + frame);
-			$scope.stompClient.subscribe('/topic/greetings',
-					function(greeting) {
-						$scope.showGreeting(JSON.parse(greeting.body).content);
-					});
+			$scope.stompClient
+					.subscribe('/topic/greetings',
+							function(greeting) {
+								$scope
+										.showGreeting(JSON
+												.parse(greeting.body).content);
+							});
 		});
 	}
-
+	
 	$scope.disconnect = function() {
 		if ($scope.stompClient != null) {
 			$scope.stompClient.disconnect();
@@ -100,12 +109,18 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		console.log("Disconnected");
 	}
 
-	$scope.sendName = function() {
+	$scope.sendNameA = function() {
 		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
-			'valorEnviado' : $("#valorEnviado").val()
+			'valorEnviado' : $("#valorEnviadoA").val() * 3
 		}));
 	}
 
+	$scope.sendNameB = function() {
+		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
+			'valorEnviado' : $("#valorEnviadoB").val()
+		}));
+	}
+	
 	$scope.showGreeting = function(message) {
 		$("#greetings").append("<tr><td>" + message + "</td></tr>");
 	}
