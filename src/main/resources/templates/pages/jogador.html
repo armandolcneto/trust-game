@@ -5,7 +5,7 @@
 <body role="document" class="page">
 
 	<div class="container" role="main" layout:fragment="content">
-		<div ng-controller="JogadorCtrl" class="container meio">
+		<div ng-controller="jogadorCtrl" class="container meio">
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum
 				erro, tente novamente.</p>
 			<div class="pageTitle col-md-12">
@@ -126,7 +126,7 @@
 										<th>Transfer&ecirc;ncias</th>
 									</tr>
 								</thead>
-								<tbody ng-show="enviouA" id="greetings"></tbody>
+								<tbody id="greetings"></tbody>
 							</table>
 						</div>
 					</div>

@@ -1,4 +1,4 @@
-angular.module("trustGameApp").controller("jogadorCtrl",function($scope,$http,$location){
+angular.module("trustGameApp").controller("gerenciandorCtrl",function($scope,$http,$location){
 
 	$scope.instrumentos = [];
 	$scope.qtdMarcados = 0;
