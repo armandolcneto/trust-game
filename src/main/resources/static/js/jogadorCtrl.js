@@ -1,50 +1,23 @@
-'use strict'
-var app = angular.module('trustGameApp', [ 'ngAnimate', 'angularSpinner' ]);
+angular
+.module("trustGameApp")
+.controller("jogadorCtrl",	function($scope, $http, $location) {
 
-app.directive('dynamic', function($compile, $timeout) {
-	return {
-		restrict : 'A',
-		replace : true,
-		link : function(scope, ele, attrs) {
-			var func = function() {
-				scope.$watch(attrs.dynamic, function(dynaProp) {
-					ele.html(dynaProp);
-					$compile(ele.contents())(scope);
-					scope.$broadcast('directiveOK', true);
-				});
-			}
-			$timeout(func, 0);
-		}
-	};
-});
-
-app.service('mainService', function() {
-	return {
-		safeApply : function($scope, fn, e1) {
-			var phase = $scope.$root.$$phase;
-			if (phase == '$apply' || phase == '$digest') {
-				if (fn && typeof fn === 'function') {
-					fn(e1);
-				}
-			} else {
-				$scope.$apply(fn);
-			}
-		},
-	};
-});
-
-app.controller('JogadorCtrl', JogadorCtrl);
-
-function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
-		usSpinnerService, mainService) {
-
-	$scope.instrumentos = [];
+	
 	$scope.qtdMarcados = 0;
-	$scope.isCheck = false;
-	$scope.tipoDoJogo = false;
+	
+	$scope.tipoDoJogo = true;
 	$scope.optionsJogador1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+	$scope.repasseJogador1 = [];
+	$scope.round = 0
+	
+	$scope.enviouA == undefined
 	$scope.encaminhado = [];
 	$scope.repasseJ1 = 8;
+	
+	$scope.update = function(experimento) {
+	
+	};
+	
 	
 	$scope.generateOptions = function(n,jogador) {
 		var input = []; 
@@ -53,13 +26,8 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		$scope.optionsJogador[jogador] = input;
 	};
 
-
-	$scope.update = function(experimento) {
-
-	};
-
 	angular.element(document).ready(function() {
-		
+
 		$("form").on('submit', function(e) {
 			e.preventDefault();
 		});
@@ -69,8 +37,8 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		$("#disconnect").click(function() {
 			$scope.disconnect();
 		});
-		$("#send").click(function() {
-			$scope.sendName();
+		$("#sendA").click(function() {
+			$scope.sendNameA();
 		});
 	});
 
@@ -90,14 +58,29 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 	$scope.connect = function() {
 		var socket = new SockJS('/gs-guide-websocket');
 		$scope.stompClient = Stomp.over(socket);
-		$scope.stompClient.connect({}, function(frame) {
-			$scope.setConnected(true);
-			console.log('Connected: ' + frame);
-			$scope.stompClient.subscribe('/topic/greetings',
-					function(greeting) {
-						$scope.showGreeting(JSON.parse(greeting.body).content);
-					});
-		});
+		$scope.stompClient
+				.connect(
+						{},
+						function(frame) {
+							$scope.setConnected(true);
+							console.log('Connected: ' + frame);
+							$scope.stompClient
+									.subscribe(
+											'/topic/greetings',
+											function(greeting) {
+												$scope
+														.showGreeting(JSON
+																.parse(greeting.body).content);
+											});
+							$scope.stompClient
+									.subscribe(
+											'/topic/greetings3',
+											function(greeting3) {
+												$scope
+														.showGreeting3(JSON
+																.parse(greeting3.body).content);
+											});
+						});
 	}
 
 	$scope.disconnect = function() {
@@ -108,13 +91,44 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 		console.log("Disconnected");
 	}
 
-	$scope.sendName = function() {
-		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
-			'valorEnviado' : $("#valorEnviado").val()
-		}));
+	$scope.sendNameA = function() {
+		$scope.stompClient
+				.send("/app/hello2", {},
+						JSON
+								.stringify({
+									'valorEnviado' : $(
+											"#valorEnviadoA")
+											.val() * 3
+								}));
+		$scope.stompClient
+				.send("/app/hello3", {},
+						JSON
+								.stringify({
+									'valorEnviado' : $(
+											"#valorEnviadoA")
+											.val() * 3
+								}));
 	}
 
 	$scope.showGreeting = function(message) {
-		$("#greetings").append("<tr><td>" + message + "</td></tr>");
+		if ($scope.round <= 5) {
+			$("#greetings").append(
+					"<tr><td>[ Fim do " + $scope.round
+							+ "º Round</td><td> " + message
+							+ " ]</td></tr>");
+		}
 	}
-}
+	$scope.showGreeting3 = function(message) {
+		$scope.round += 1
+		if ($scope.round <= 5) {
+			$("#greetings").append(
+					"<tr><td>[ Inicio do " + $scope.round
+							+ "º Round</td><td> " + message
+							+ " ]</td></tr>");
+		} else {
+			$("#greetings")
+					.append(
+							"<tr><td></td><td>Fim do Jogo!</td></tr>");
+		}
+	}
+});

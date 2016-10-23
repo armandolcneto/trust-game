@@ -5,7 +5,7 @@
 <body role="document" class="page">
 
 	<div class="container" role="main" layout:fragment="content">
-		<div ng-controller="JogadorCtrl" class="container meio">
+		<div ng-controller="gerenciandorCtrl" class="container meio">
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum
 				erro, tente novamente.</p>
 			<div class="pageTitle col-md-12">
@@ -13,7 +13,7 @@
 			</div>
 
 			<div>
-				<form name="form" th:action="@{/jogador}" action="/login"
+				<form name="form" th:action="@{/gerenciador}" action="/login"
 					method="POST">
 					<div class="row">
 						<div class="col-md-6">
@@ -99,7 +99,7 @@
 				   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
 					</div>
 					<div>
-						<button id="send" class="btn btn-default" type="submit">Enviar</button>
+						<button id="sendB" class="btn btn-default" type="submit">Enviar</button>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -109,7 +109,7 @@
 										<th>Transfer&ecirc;ncias</th>
 									</tr>
 								</thead>
-								<tbody id="greetings"></tbody>
+								<tbody id="greetings2"></tbody>
 							</table>
 						</div>
 					</div>

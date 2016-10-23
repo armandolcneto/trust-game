@@ -1,4 +1,7 @@
-angular.module("trustGameApp").controller("adminCtrl",function($scope,$http,$location){
+var app = angular.module('trustGameApp', []);
+
+app.controller('adminCtrl', function($scope,$http,$location) {
+  
 	$scope.experimentos = [];
 	$scope.novoExperimento = [];
 	$scope.novo = false;
