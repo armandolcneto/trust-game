@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.trustgame.model.AtuacaoProfissional;
+import br.com.trustgame.model.ConfigJogo;
 import br.com.trustgame.model.FormacaoAcademica;
 import br.com.trustgame.model.Usuario;
 import br.com.trustgame.service.AtuacaoProfissionalService;
+import br.com.trustgame.service.ConfigJogoService;
 import br.com.trustgame.service.FormacaoAcademicaService;
 
 @Controller
@@ -27,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	private AtuacaoProfissionalService atuacaoProfissionalService;
+	
+	@Autowired
+	private ConfigJogoService configJogoService;
 	
 	private ModelAndView mav;
 	
@@ -65,16 +70,23 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.GET})
+	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.POST })
 	@ResponseBody
+	
 	public List<FormacaoAcademica> getAll(){
 		return formacaoAcademicaService.getAll();
 	}
 	
-	@RequestMapping(value = "/todasAtuacaoProfissional", method = { RequestMethod.GET})
+	@RequestMapping(value = "/todasAtuacaoProfissional", method = { RequestMethod.POST })
 	@ResponseBody
 	public List<AtuacaoProfissional> getAllAtuacao(){
 		return atuacaoProfissionalService.getAll();
+	}
+	
+	@RequestMapping(value = "/buscarExperimentos", method = { RequestMethod.POST})
+	@ResponseBody
+	public List<ConfigJogo> getAllExperimentos(){
+		return configJogoService.getAll();
 	}
 	
 //	/*@RequestMapping(value = "/", method = RequestMethod.GET)

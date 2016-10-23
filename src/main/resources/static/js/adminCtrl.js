@@ -1,25 +1,13 @@
 angular.module("trustGameApp").controller("adminCtrl",function($scope,$http,$location){
-	
-  
 	$scope.experimentos = [];
+	$scope.novoExperimento = [];
 	$scope.novo = false;
-	$scope.buscarInstrumentos = function(){
-		$http({
-			url: $location.url()+'buscarExperimentos',
-			method: "POST"
-		})
-		.then(function(response) {
-			$scope.experimentos = response.data;
+	carregarPagina();
+	
+	function carregarPagina() {
+		$http.get('http://'+window.location.host+'/buscarExperimentos').success( function(response) {
+			$scope.experimentos = response;
 		});
-
-	};
-	
-	$scope.update = function (experimento){
-		
-		
-	};
-	
-	
-	
+	}
 	
 });

@@ -4,8 +4,8 @@
 
 <body role="document" class="page" >
 
-	<div class="container" role="main" layout:fragment="content">
-		<div ng-controller="adminCtrl" class="container meio">
+	<div class="container" role="main" layout:fragment="content" ng-controller="adminCtrl">
+		<div  class="container meio">
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum erro, tente novamente.</p>	
     		<div class="pageTitle col-md-12">
     	 		<h2>Administra&ccedil;&atilde;o</h2>
@@ -19,7 +19,7 @@
 			   <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="novoExperimento.nome" /><br />
 			   <label class="control-label requerido">Tipo</label>  
 			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="single" />Experimento 1x1</label></div>
-			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="single" />Experimento 5x5</label></div>
+			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="multiplayer" />Experimento 5x5</label></div>
 			    
 			    <div class="form-inline">
 			    	<input class="btn btn-default" type="button" ng-click="novo=false"  value="Cancelar"/>
@@ -27,10 +27,11 @@
 			    </div>
 			  </form>
 			</div>
-	    	<table ng-show="experimentos.length">
-				<tr ng-repeat="experimento in experimentos | orderBy : 'id'">
+	    	<table> <!--  ng-show="experimentos.length"-->
+				<tr ng-repeat="experimento in experimentos">
 					<td ng-hide="true">{{ experimento.id }}</td>
 					<td>{{ experimento.nome }}</td>
+					<td>{{ experimento.tipo }}</td>
 					<td>{{ experimento.status }}</td>
 				</tr>
 			</table>

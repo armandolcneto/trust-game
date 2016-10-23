@@ -41,10 +41,18 @@ function JogadorCtrl($scope, $http, $compile, $location, $rootScope,
 	$scope.instrumentos = [];
 	$scope.qtdMarcados = 0;
 	$scope.isCheck = false;
-	$scope.tipoDoJogo = true;
+	$scope.tipoDoJogo = false;
 	$scope.optionsJogador1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-	$scope.repasseJogador1 = [];
+	$scope.encaminhado = [];
+	$scope.repasseJ1 = 8;
 	
+	$scope.generateOptions = function(n,jogador) {
+		var input = []; 
+		for (var i=1; i=n; i++)
+		      input.push(i);
+		$scope.optionsJogador[jogador] = input;
+	};
+
 
 	$scope.update = function(experimento) {
 
