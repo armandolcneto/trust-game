@@ -10,10 +10,16 @@ angular
 					$scope.tipoDoJogo = true;
 					$scope.enviouB = true;
 					$scope.round = 0
-					$scope.optionsJogador2 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-							11, 12, 13, 14, 15 ];
+					$scope.optionsJogador2 = [];
 					$scope.repasseJogador2 = [];
 
+					$scope.generateOptions = function(value){
+						var array = [];
+						for(var i=0;i < value;i++){
+							array.push(i+1);
+						}
+						return array;
+					}
 					$scope.update = function(experimento) {
 
 					};
@@ -99,7 +105,11 @@ angular
 						$scope.round += 1
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
-									"<tr><td>[ Inicio do "+$scope.round+"º Round</td><td> " + message + " ]</td></tr>");
+									"<tr><td>[ Inicio do "+$scope.round+"º Round</td><td> " +
+									"Valor Enviado para o Jogador A: R$"+ message+",00" + " ]</td></tr>");
+							$scope.optionsJogador2 = [];
+							$scope.optionsJogador2 = $scope.generateOptions(message);
+							$('#valorEnviadoB').change();
 						}
 					}
 					$scope.showGreeting4 = function(message) {

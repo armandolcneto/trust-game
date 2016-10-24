@@ -21,7 +21,7 @@ public class GreetingController {
     @SendTo("/topic/greetings2")
     public Greeting greeting2(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        return new Greeting("Valor Recebido do Jogador A: R$"+ message.getvalorEnviado()+",00");
+        return new Greeting(message.getvalorEnviado());
     }
     @MessageMapping("/hello3")
     @SendTo("/topic/greetings3")
