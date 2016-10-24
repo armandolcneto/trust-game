@@ -1,29 +1,18 @@
 angular
 .module("trustGameApp")
-.controller("jogadorCtrl",	function($scope, $http, $location) {
+.controller(
+		"jogadorCtrl",
+function($scope, $http, $location) {
 
-	
-	$scope.qtdMarcados = 0;
-	
 	$scope.tipoDoJogo = true;
-	$scope.optionsJogador1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+	$scope.optionsJogador1 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 	$scope.repasseJogador1 = [];
 	$scope.round = 0
-	
+
 	$scope.enviouA == undefined
-	$scope.encaminhado = [];
-	$scope.repasseJ1 = 8;
-	
+
 	$scope.update = function(experimento) {
-	
-	};
-	
-	
-	$scope.generateOptions = function(n,jogador) {
-		var input = []; 
-		for (var i=1; i=n; i++)
-		      input.push(i);
-		$scope.optionsJogador[jogador] = input;
+
 	};
 
 	angular.element(document).ready(function() {
@@ -39,6 +28,8 @@ angular
 		});
 		$("#sendA").click(function() {
 			$scope.sendNameA();
+			$scope.sendA = "disabled";
+			$scope.disableButton = true;
 		});
 	});
 
@@ -58,29 +49,26 @@ angular
 	$scope.connect = function() {
 		var socket = new SockJS('/gs-guide-websocket');
 		$scope.stompClient = Stomp.over(socket);
-		$scope.stompClient
-				.connect(
-						{},
-						function(frame) {
-							$scope.setConnected(true);
-							console.log('Connected: ' + frame);
-							$scope.stompClient
-									.subscribe(
-											'/topic/greetings',
-											function(greeting) {
-												$scope
-														.showGreeting(JSON
-																.parse(greeting.body).content);
-											});
-							$scope.stompClient
-									.subscribe(
-											'/topic/greetings3',
-											function(greeting3) {
-												$scope
-														.showGreeting3(JSON
-																.parse(greeting3.body).content);
-											});
-						});
+		$scope.stompClient.connect({},function(frame) {
+			$scope.setConnected(true);
+			console.log('Connected: ' + frame);
+			$scope.stompClient
+				.subscribe(
+					'/topic/greetings',
+					function(greeting) {
+						$scope
+								.showGreeting(JSON
+										.parse(greeting.body).content);
+				});
+			$scope.stompClient
+				.subscribe(
+					'/topic/greetings3',
+					function(greeting3) {
+						$scope
+								.showGreeting3(JSON
+										.parse(greeting3.body).content);
+					});
+		});
 	}
 
 	$scope.disconnect = function() {
@@ -116,6 +104,7 @@ angular
 					"<tr><td>[ Fim do " + $scope.round
 							+ "º Round</td><td> " + message
 							+ " ]</td></tr>");
+			$scope.disableButton = false;
 		}
 	}
 	$scope.showGreeting3 = function(message) {
@@ -126,9 +115,8 @@ angular
 							+ "º Round</td><td> " + message
 							+ " ]</td></tr>");
 		} else {
-			$("#greetings")
-					.append(
-							"<tr><td></td><td>Fim do Jogo!</td></tr>");
+			$("#greetings").append(
+					"<tr><td></td><td>Fim do Jogo!</td></tr>");
 		}
 	}
 });
