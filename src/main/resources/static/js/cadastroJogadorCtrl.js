@@ -5,11 +5,11 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 	carregarPagina();
 	
 	function carregarPagina() {
-		$http.post('http://'+window.location.host+'/todasFormacaoAcademica').success( function(response) {
+		$http.get('http://'+window.location.host+'/todasFormacaoAcademica').success( function(response) {
 			$scope.formacoes = response;
 		});
 		
-		$http.post('http://'+window.location.host+'/todasAtuacaoProfissional').success( function(response) {
+		$http.get('http://'+window.location.host+'/todasAtuacaoProfissional').success( function(response) {
 			$scope.atuacoes = response;
 		});
 	}

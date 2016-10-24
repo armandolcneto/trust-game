@@ -70,20 +70,20 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.POST })
+	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.GET })
 	@ResponseBody
 	
 	public List<FormacaoAcademica> getAll(){
 		return formacaoAcademicaService.getAll();
 	}
 	
-	@RequestMapping(value = "/todasAtuacaoProfissional", method = { RequestMethod.POST })
+	@RequestMapping(value = "/todasAtuacaoProfissional", method = { RequestMethod.GET })
 	@ResponseBody
 	public List<AtuacaoProfissional> getAllAtuacao(){
 		return atuacaoProfissionalService.getAll();
 	}
 	
-	@RequestMapping(value = "/buscarExperimentos", method = { RequestMethod.POST})
+	@RequestMapping(value = "/buscarExperimentos", method = { RequestMethod.GET})
 	@ResponseBody
 	public List<ConfigJogo> getAllExperimentos(){
 		return configJogoService.getAll();
