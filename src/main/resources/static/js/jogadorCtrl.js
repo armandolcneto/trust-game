@@ -105,6 +105,10 @@ function($scope, $http, $location) {
 							+ "º Round</td><td> " + message
 							+ " ]</td></tr>");
 			$scope.disableButton = false;
+			if($scope.round == 5) {
+				$("#greetings").append(
+						"<tr><td></td><td>Fim do Jogo!</td></tr>");
+			}
 		}
 	}
 	$scope.showGreeting3 = function(message) {
@@ -114,9 +118,6 @@ function($scope, $http, $location) {
 					"<tr><td>[ Inicio do " + $scope.round
 							+ "º Round</td><td> " + message
 							+ " ]</td></tr>");
-		} else {
-			$("#greetings").append(
-					"<tr><td></td><td>Fim do Jogo!</td></tr>");
-		}
+		} 
 	}
 });

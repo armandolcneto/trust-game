@@ -106,7 +106,7 @@ angular
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
 									"<tr><td>[ Inicio do "+$scope.round+"º Round</td><td> " +
-									"Valor Enviado para o Jogador A: R$"+ message+",00" + " ]</td></tr>");
+									"Valor Recebido do Jogador A: R$"+ message+",00" + " ]</td></tr>");
 							$scope.optionsJogador2 = [];
 							$scope.optionsJogador2 = $scope.generateOptions(message);
 							$('#valorEnviadoB').change();
@@ -116,10 +116,10 @@ angular
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
 									"<tr><td>[ Fim do "+$scope.round+"º Round</td><td> " + message + " ]</td></tr>");
-						}else{
-							$("#greetings2").append(
-									"<tr><td align=center>Fim do Jogo!</td></tr>");
-						}
-						
+							if ($scope.round == 5){
+								$("#greetings2").append(
+								"<tr><td align=center>Fim do Jogo!</td></tr>");
+							}
+						}	
 					}
 				});
