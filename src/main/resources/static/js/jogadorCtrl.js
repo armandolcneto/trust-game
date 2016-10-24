@@ -31,6 +31,8 @@ angular
 						});
 						$("#sendA").click(function() {
 							$scope.sendNameA();
+							$scope.sendA = "disabled";
+							$scope.disableButton = true;
 						});
 					});
 
@@ -108,6 +110,7 @@ angular
 									"<tr><td>[ Fim do " + $scope.round
 											+ "º Round</td><td> " + message
 											+ " ]</td></tr>");
+							$scope.disableButton = false;
 						}
 					}
 					$scope.showGreeting3 = function(message) {
@@ -118,9 +121,8 @@ angular
 											+ "º Round</td><td> " + message
 											+ " ]</td></tr>");
 						} else {
-							$("#greetings")
-									.append(
-											"<tr><td></td><td>Fim do Jogo!</td></tr>");
+							$("#greetings").append(
+									"<tr><td></td><td>Fim do Jogo!</td></tr>");
 						}
 					}
 				});
