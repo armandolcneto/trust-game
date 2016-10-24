@@ -101,9 +101,9 @@ function($scope, $http, $location) {
 	$scope.showGreeting = function(message) {
 		if ($scope.round <= 5) {
 			$("#greetings").append(
-					"<tr><td>[ Fim do " + $scope.round
-							+ "º Round</td><td> " + message
-							+ " ]</td></tr>");
+					"<tr><td>Fim do " + $scope.round
+							+ "º Round</td><td> " + 
+							"Valor Recebido do Jogador B: R$"+ message+",00" + " }</td></tr>");
 			$scope.disableButton = false;
 			if($scope.round == 5) {
 				$("#greetings").append(
@@ -115,9 +115,26 @@ function($scope, $http, $location) {
 		$scope.round += 1
 		if ($scope.round <= 5) {
 			$("#greetings").append(
-					"<tr><td>[ Inicio do " + $scope.round
-							+ "º Round</td><td> " + message
-							+ " ]</td></tr>");
+					"<tr><td>{ Inicio do " + $scope.round
+							+ "º Round</td><td> " + 
+							"Valor Enviado para o Jogador B: R$"+ message+",00" + "</td></tr>");
+			var dataObj = {
+					id : null,
+					usuario : 1,
+					envioJogador : parseFloat(message),
+					tempo : 1,
+					roundJogo : $scope.round,
+					tipoJogador : 'ADM'
+					
+			};
+
+			$http({url: 'http://'+window.location.host+'/transferencia', method: "POST", data: dataObj}).
+			success(function(data, status, headers, config) {
+				console.log("deu certo");
+			}).
+			error(function(data, status, headers, config) {
+				console.log("data.token " + data.token);
+			});
 		} 
 	}
 });
