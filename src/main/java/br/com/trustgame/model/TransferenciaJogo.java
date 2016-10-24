@@ -26,11 +26,9 @@ public class TransferenciaJogo implements Serializable{
 	@Column(name = "pk_transferencia", nullable = false)
 	private int id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "jogador")
 	private Usuario usuario;
-
-	@Column(name = "saldo_jogador", nullable = false)
-	private float saldoJogador;
 	
 	@Column(name = "envio_jogador", nullable = false)
 	private float envioJogador;
@@ -59,15 +57,7 @@ public class TransferenciaJogo implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public float getSaldoJogador() {
-		return saldoJogador;
-	}
-
-	public void setSaldoJogador(float saldoJogador) {
-		this.saldoJogador = saldoJogador;
-	}
-
+	
 	public float getEnvioJogador() {
 		return envioJogador;
 	}
