@@ -94,22 +94,28 @@ angular
 					$scope.sendNameB = function() {
 						$scope.stompClient.send("/app/hello", {}, JSON
 								.stringify({
-									'valorEnviado' : $("#valorEnviadoB").val()
+									'valorEnviado' : $("#valorEnviadoB").val(),
+									'user': "Euler"
 								}));
-						$scope.stompClient.send("/app/hello4", {}, JSON
-								.stringify({
-									'valorEnviado' : $("#valorEnviadoB").val()
-								}));
+//						$scope.stompClient.send("/app/hello4", {}, JSON
+//								.stringify({
+//									'valorEnviado' : $("#valorEnviadoB").val(),
+//									'user': "Euler"
+//								}));
 					}
 
 					$scope.showGreeting = function(message) {
+						var obj =  JSON.parse(message, function(k, v ){
+							console.log(k); 
+							return v;
+						});
 						$scope.round += 1;
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
 									"<tr><td>{ Inicio do "+$scope.round+"º Round</td><td> " +
-									"Valor Recebido do Jogador A: R$"+ message+",00" + "</td></tr>");
+									"Valor Recebido do Jogador A: R$"+ obj.valor+",00" + "</td></tr>");
 							$scope.optionsJogador2 = [];
-							$scope.optionsJogador2 = $scope.generateOptions(message);
+							$scope.optionsJogador2 = $scope.generateOptions(obj.valor);
 							$('#valorEnviadoB').change();
 							$scope.saldoAcumuladoB += parseFloat(message);
 							var usuarioB = {id : 2, username: 'armando.neto', password : '123456'};
@@ -162,5 +168,9 @@ angular
 								console.log("não deu :-(");
 							});
 						}	
+					}
+				
+					$scope.showCanal= function(){
+						console.log($scope.stompClient.ws);
 					}
 				});

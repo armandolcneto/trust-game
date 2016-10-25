@@ -60,14 +60,14 @@ function($scope, $http, $location) {
 								.showGreeting(JSON
 										.parse(greeting.body).content);
 				});
-			$scope.stompClient
-				.subscribe(
-					'/topic/greetings3',
-					function(greeting3) {
-						$scope
-								.showGreeting3(JSON
-										.parse(greeting3.body).content);
-					});
+//			$scope.stompClient
+//				.subscribe(
+//					'/topic/greetings3',
+//					function(greeting3) {
+//						$scope
+//								.showGreeting3(JSON
+//										.parse(greeting3.body).content);
+//					});
 		});
 	}
 
@@ -84,26 +84,28 @@ function($scope, $http, $location) {
 				.send("/app/hello2", {},
 						JSON
 								.stringify({
-									'valorEnviado' : $(
-											"#valorEnviadoA")
-											.val() * 3
+									'valorEnviado' : $("#valorEnviadoA").val() * 3,
+									'user': "Euler"
 								}));
-		$scope.stompClient
-				.send("/app/hello3", {},
-						JSON
-								.stringify({
-									'valorEnviado' : $(
-											"#valorEnviadoA")
-											.val() * 3
-								}));
+//		$scope.stompClient
+//				.send("/app/hello3", {},
+//						JSON
+//								.stringify({
+//									'valorEnviado' : $("#valorEnviadoA").val() * 3,
+//									'user': "Euler"
+//								}));
 	}
 
 	$scope.showGreeting = function(message) {
+		var obj =  JSON.parse(message, function(k, v ){
+			console.log(k); 
+			return v;
+		});
 		if ($scope.round <= 5) {
 			$("#greetings").append(
 					"<tr><td>Fim do " + $scope.round
 							+ "º Round</td><td> " + 
-							"Valor Recebido do Jogador B: R$"+ message+",00" + " }</td></tr>");
+							"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + " }</td></tr>");
 			$scope.disableButton = false;
 			
 			if($scope.round == 5) {
@@ -111,7 +113,7 @@ function($scope, $http, $location) {
 						"<tr><td></td><td>Fim do Jogo!</td></tr>");
 			}
 			
-			$scope.saldoAcumuladoA += parseFloat(message);
+			$scope.saldoAcumuladoA += parseFloat(obj.valor);
 			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
 			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			
@@ -160,5 +162,9 @@ function($scope, $http, $location) {
 			});
 			
 		} 
+	}
+	
+	$scope.showCanal= function(){
+		console.log($scope.stompClient.ws);
 	}
 });

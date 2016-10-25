@@ -90,6 +90,8 @@ function HomeController ($scope, $http, $compile, $location, $rootScope, usSpinn
 
 	$scope.showGreeting = function (message) {
 	     $("#greetings").append("<tr><td>" + message + "</td></tr>");
-	 }	 	
+	 }
+	
+	
 }
 
