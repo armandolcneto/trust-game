@@ -9,7 +9,8 @@ angular
 					$scope.isCheck = false;
 					$scope.tipoDoJogo = true;
 					$scope.enviouB = true;
-					$scope.round = 0
+					$scope.round = 0;
+					$scope.saldoAcumuladoB = 0;
 					$scope.optionsJogador2 = [];
 					$scope.repasseJogador2 = [];
 
@@ -102,7 +103,7 @@ angular
 					}
 
 					$scope.showGreeting = function(message) {
-						$scope.round += 1
+						$scope.round += 1;
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
 									"<tr><td>{ Inicio do "+$scope.round+"º Round</td><td> " +
@@ -110,6 +111,26 @@ angular
 							$scope.optionsJogador2 = [];
 							$scope.optionsJogador2 = $scope.generateOptions(message);
 							$('#valorEnviadoB').change();
+							$scope.saldoAcumuladoB += parseFloat(message);
+							var usuarioB = {id : 2, username: 'armando.neto', password : '123456'};
+							var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+							
+							var dataObj2 = {
+									id : 3,
+									usuario : usuarioB,
+									conifgJofo : jogo,
+									tipoPerfil : 'INV',
+									saldoAcumulado : $scope.saldoAcumuladoB
+									
+							};
+
+							$http({url: 'http://'+window.location.host+'/saldoAcumulado', method: "POST", data: dataObj2}).
+							success(function(data, status, headers, config) {
+								console.log("deu certo");
+							}).
+							error(function(data, status, headers, config) {
+								console.log("não deu :-(");
+							});
 						}
 					}
 					$scope.showGreeting4 = function(message) {
@@ -117,6 +138,7 @@ angular
 							$("#greetings2").append(
 									"<tr><td>Fim do "+$scope.round+"º Round</td><td> " + 
 									"Valor Enviado para o Jogador A: R$"+ message+",00" + " }</td></tr>");
+
 							if ($scope.round == 5){
 								$("#greetings2").append(
 								"<tr><td align=center>Fim do Jogo!</td></tr>");

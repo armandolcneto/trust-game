@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.trustgame.model.AtuacaoProfissional;
 import br.com.trustgame.model.ConfigJogo;
 import br.com.trustgame.model.FormacaoAcademica;
+import br.com.trustgame.model.PerfilJogador;
 import br.com.trustgame.model.TransferenciaJogo;
 import br.com.trustgame.service.AtuacaoProfissionalService;
 import br.com.trustgame.service.ConfigJogoService;
 import br.com.trustgame.service.FormacaoAcademicaService;
+import br.com.trustgame.service.PerfilJogadorService;
 import br.com.trustgame.service.TransferenciaJogoService;
 
 
@@ -37,6 +39,9 @@ public class HomeController {
 	
 	@Autowired
 	private TransferenciaJogoService transferenciaJogoService;
+	
+	@Autowired
+	private PerfilJogadorService perfilJogadorService;
 	
 	private ModelAndView mav;
 	
@@ -98,6 +103,13 @@ public class HomeController {
 	@ResponseBody
 	public HttpStatus transferencia(@RequestBody TransferenciaJogo data){
 		transferenciaJogoService.transferencia(data);
+		return HttpStatus.OK;
+	}	
+	
+	@RequestMapping(value = "/saldoAcumulado", method = { RequestMethod.POST})
+	@ResponseBody
+	public HttpStatus saldoAcumulado(@RequestBody PerfilJogador data){
+		perfilJogadorService.saldoAcumulado(data);
 		return HttpStatus.OK;
 	}	
 	
