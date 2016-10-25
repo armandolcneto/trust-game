@@ -121,13 +121,14 @@ angular
 								$("#greetings2").append(
 								"<tr><td align=center>Fim do Jogo!</td></tr>");
 							}
+							var usuarioB = {id : 2, username: 'armando.neto', password : '123456'};
 							var dataObj = {
 									id : null,
-									usuario : 2,
+									usuario : usuarioB,
 									envioJogador : parseFloat(message),
 									tempo : 1,
 									roundJogo : $scope.round,
-									tipoJogador : 'INV'
+									tipoJogador : 'B'
 									
 							};
 
@@ -136,7 +137,7 @@ angular
 								console.log("deu certo");
 							}).
 							error(function(data, status, headers, config) {
-								console.log("data.token " + data.token);
+								console.log("não deu :-(");
 							});
 						}	
 					}

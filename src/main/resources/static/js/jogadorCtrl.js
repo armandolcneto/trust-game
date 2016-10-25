@@ -118,13 +118,14 @@ function($scope, $http, $location) {
 					"<tr><td>{ Inicio do " + $scope.round
 							+ "º Round</td><td> " + 
 							"Valor Enviado para o Jogador B: R$"+ message+",00" + "</td></tr>");
+			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
 			var dataObj = {
 					id : null,
-					usuario : 1,
+					usuario : usuarioA,
 					envioJogador : parseFloat(message),
 					tempo : 1,
 					roundJogo : $scope.round,
-					tipoJogador : 'ADM'
+					tipoJogador : 'A'
 					
 			};
 
@@ -133,7 +134,7 @@ function($scope, $http, $location) {
 				console.log("deu certo");
 			}).
 			error(function(data, status, headers, config) {
-				console.log("data.token " + data.token);
+				console.log("não deu :-(");
 			});
 		} 
 	}

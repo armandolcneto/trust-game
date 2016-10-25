@@ -33,6 +33,14 @@ public class TransferenciaJogo implements Serializable{
 	@Column(name = "envio_jogador", nullable = false)
 	private float envioJogador;
 	
+//	public Integer getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Integer usuario) {
+//		this.usuario = usuario;
+//	}
+
 	@Column(name = "tempo_envio_jogador", nullable = false)
 	private Integer tempo;
 	
