@@ -1,22 +1,16 @@
-angular
-.module("trustGameApp")
-.controller(
-		"jogadorCtrl",
-function($scope, $http, $location) {
+angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http, $location) {
 
 	$scope.tipoDoJogo = true;
 	$scope.optionsJogador1 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 	$scope.repasseJogador1 = [];
 	$scope.round = 0;
 	$scope.saldoAcumuladoA = 0;
-	$scope.enviouA == undefined
 
 	$scope.update = function(experimento) {
 
 	};
 
 	angular.element(document).ready(function() {
-
 		$("form").on('submit', function(e) {
 			e.preventDefault();
 		});
@@ -29,8 +23,7 @@ function($scope, $http, $location) {
 		$("#sendA").click(function() {
 			$scope.sendNameA();
 			$scope.sendA = "disabled";
-			$scope.disableButton = true;
-		});
+		});	
 	});
 
 	$scope.stompClient = null;
@@ -52,13 +45,9 @@ function($scope, $http, $location) {
 		$scope.stompClient.connect({},function(frame) {
 			$scope.setConnected(true);
 			console.log('Connected: ' + frame);
-			$scope.stompClient
-				.subscribe(
-					'/topic/greetings',
-					function(greeting) {
-						$scope
-								.showGreeting(JSON
-										.parse(greeting.body).content);
+			$scope.stompClient.subscribe('/topic/greetings',
+				function(greeting) {
+					$scope.showGreeting(JSON.parse(greeting.body).content);
 				});
 		});
 	}
@@ -72,20 +61,10 @@ function($scope, $http, $location) {
 	}
 
 	$scope.sendNameA = function() {
-		$scope.stompClient
-				.send("/app/hello2", {},
-						JSON
-								.stringify({
-									'valorEnviado' : $("#valorEnviadoA").val() * 3,
-									'user': "Euler"
-								}));
-//		$scope.stompClient
-//				.send("/app/hello3", {},
-//						JSON
-//								.stringify({
-//									'valorEnviado' : $("#valorEnviadoA").val() * 3,
-//									'user': "Euler"
-//								}));
+		$scope.stompClient.send("/app/hello2", {}, JSON.stringify({
+			'valorEnviado' : $("#valorEnviadoA").val() * 3,
+			'user': "Euler"
+		}));
 	}
 
 	$scope.showGreeting = function(message) {
@@ -93,26 +72,43 @@ function($scope, $http, $location) {
 			console.log(k); 
 			return v;
 		});
+		
 		$scope.round += 1;
+		
 		if ($scope.round <= 5) {
-			$("#greetings").append(
-					"<tr><td>"+$scope.round
-							+ "º Round</td><td> " + 
-							"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>");
-			$scope.disableButton = false;
+			$("#greetings").append("<tr><td>"+$scope.round + "º Round</td><td> " + 
+					"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>");
 			
-			
+			// tranferencia do jogador B
+			var usuarioB = {id : 2, username: 'armando.neto', password : '123456'};
+			var dataObj = {
+				 id : null,
+				 usuario : usuarioB,
+				 envioJogador : parseFloat(obj.valor),
+				 tempo : 1,
+				 roundJogo : $scope.round,
+				 tipoJogador : 'B'									
+			 };
+					
+			 $http({url: 'http://'+window.location.host+'/transferencia', method:"POST", data: dataObj}).
+			 success(function(data, status, headers, config) {
+				 console.log("deu certo");
+			 }).
+			 error(function(data, status, headers, config) {
+				 console.log("não deu :-(");
+			 });
+					 
+			//saldo acumulado de A
 			$scope.saldoAcumuladoA += parseFloat(obj.valor);
+			
 			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
 			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
-			
 			var dataObj2 = {
-					id : 1,
-					usuario : usuarioA,
-					conifgJofo : jogo,
-					tipoPerfil : 'ADM',
-					saldoAcumulado : $scope.saldoAcumuladoA
-					
+				id : 1,
+				usuario : usuarioA,
+				conifgJofo : jogo,
+				tipoPerfil : 'ADM',
+				saldoAcumulado : $scope.saldoAcumuladoA		
 			};
 
 			$http({url: 'http://'+window.location.host+'/saldoAcumulado', method: "POST", data: dataObj2}).
@@ -128,35 +124,48 @@ function($scope, $http, $location) {
 			}
 		}
 	}
-	$scope.showGreeting3 = function(message) {
-		if ($scope.round <= 5) {
-			$("#greetings").append(
-					"<tr><td>{ Inicio do " + $scope.round
-							+ "º Round</td><td> " + 
-							"Valor Enviado para o Jogador B: R$"+ message+",00" + "</td></tr>");
-			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
-			var dataObj = {
-					id : null,
-					usuario : usuarioA,
-					envioJogador : parseFloat(message),
-					tempo : 1,
-					roundJogo : $scope.round,
-					tipoJogador : 'A'
-					
-			};
 
-			$http({url: 'http://'+window.location.host+'/transferencia', method: "POST", data: dataObj}).
-			success(function(data, status, headers, config) {
-				console.log("deu certo");
-			}).
-			error(function(data, status, headers, config) {
-				console.log("não deu :-(");
-			});
-			
-		} 
-	}
 	
 	$scope.showCanal= function(){
 		console.log($scope.stompClient.ws);
 	}
+	
 });
+
+//CODIGOS COMENTADOS -------------verificar se vão ser usados!!
+
+//$scope.stompClient
+//.send("/app/hello3", {},
+//		JSON
+//				.stringify({
+//					'valorEnviado' : $("#valorEnviadoA").val() * 3,
+//					'user': "Euler"
+//				}));
+
+//$scope.showGreeting3 = function(message) {
+//if ($scope.round <= 5) {
+//	$("#greetings").append(
+//			"<tr><td>{ Inicio do " + $scope.round
+//					+ "º Round</td><td> " + 
+//					"Valor Enviado para o Jogador B: R$"+ message+",00" + "</td></tr>");
+//	var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
+//	var dataObj = {
+//			id : null,
+//			usuario : usuarioA,
+//			envioJogador : parseFloat(message),
+//			tempo : 1,
+//			roundJogo : $scope.round,
+//			tipoJogador : 'A'
+//			
+//	};
+//
+//	$http({url: 'http://'+window.location.host+'/transferencia', method: "POST", data: dataObj}).
+//	success(function(data, status, headers, config) {
+//		console.log("deu certo");
+//	}).
+//	error(function(data, status, headers, config) {
+//		console.log("não deu :-(");
+//	});
+//	
+//} 
+//}
