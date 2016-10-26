@@ -112,7 +112,7 @@ angular
 						$scope.round += 1;
 						if ($scope.round <= 5) {
 							$("#greetings2").append(
-									"<tr><td>{ Inicio do "+$scope.round+"º Round</td><td> " +
+									"<tr><td>"+$scope.round+"º Round</td><td> " +
 									"Valor Recebido do Jogador A: R$"+ obj.valor+",00" + "</td></tr>");
 							$scope.optionsJogador2 = [];
 							$scope.optionsJogador2 = $scope.generateOptions(obj.valor);
@@ -137,6 +137,10 @@ angular
 							error(function(data, status, headers, config) {
 								console.log("não deu :-(");
 							});
+							if($scope.round == 5) {
+								$("#greetings2").append(
+										"<tr><td></td><td>Fim do Jogo!</td></tr>");
+							}
 						}
 					}
 					$scope.showGreeting4 = function(message) {

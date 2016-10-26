@@ -60,14 +60,6 @@ function($scope, $http, $location) {
 								.showGreeting(JSON
 										.parse(greeting.body).content);
 				});
-//			$scope.stompClient
-//				.subscribe(
-//					'/topic/greetings3',
-//					function(greeting3) {
-//						$scope
-//								.showGreeting3(JSON
-//										.parse(greeting3.body).content);
-//					});
 		});
 	}
 
@@ -101,17 +93,14 @@ function($scope, $http, $location) {
 			console.log(k); 
 			return v;
 		});
+		$scope.round += 1;
 		if ($scope.round <= 5) {
 			$("#greetings").append(
-					"<tr><td>Fim do " + $scope.round
+					"<tr><td>"+$scope.round
 							+ "º Round</td><td> " + 
-							"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + " }</td></tr>");
+							"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>");
 			$scope.disableButton = false;
 			
-			if($scope.round == 5) {
-				$("#greetings").append(
-						"<tr><td></td><td>Fim do Jogo!</td></tr>");
-			}
 			
 			$scope.saldoAcumuladoA += parseFloat(obj.valor);
 			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
@@ -133,10 +122,13 @@ function($scope, $http, $location) {
 			error(function(data, status, headers, config) {
 				console.log("não deu :-(");
 			});
+			if($scope.round == 5) {
+				$("#greetings").append(
+						"<tr><td></td><td>Fim do Jogo!</td></tr>");
+			}
 		}
 	}
 	$scope.showGreeting3 = function(message) {
-		$scope.round += 1;
 		if ($scope.round <= 5) {
 			$("#greetings").append(
 					"<tr><td>{ Inicio do " + $scope.round
