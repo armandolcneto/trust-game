@@ -63,15 +63,20 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.sendNameA = function() {
 		$scope.stompClient.send("/app/hello2", {}, JSON.stringify({
 			'valorEnviado' : $("#valorEnviadoA").val() * 3,
-			'user': "Euler"
+			'user': "Euler" 
 		}));
 	}
 
 	$scope.showGreeting = function(message) {
-		var obj =  JSON.parse(message, function(k, v ){
+		var obj =  JSON.parse(message, function(k, v){
 			console.log(k); 
 			return v;
 		});
+		
+//		var objSaldo =  JSON.parse(message, function(k, v, s){
+//			console.log(k); 
+//			return s;
+//		});
 		
 		$scope.round += 1;
 		
@@ -79,33 +84,11 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			$("#greetings").append("<tr><td>"+$scope.round + "º Round</td><td> " + 
 					"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>");
 			
-			// tranferencia do jogador B
-			var usuarioB = {id : 2, username: 'armando.neto', password : '123456'};
-			var dataObj = {
-				 id : null,
-				 usuario : usuarioB,
-				 envioJogador : parseFloat(obj.valor),
-				 tempo : 1,
-				 roundJogo : $scope.round,
-				 tipoJogador : 'B'									
-			 };
-					
-			 $http({url: 'http://'+window.location.host+'/transferencia', method:"POST", data: dataObj}).
-			 success(function(data, status, headers, config) {
-				 console.log("deu certo");
-			 }).
-			 error(function(data, status, headers, config) {
-				 console.log("não deu :-(");
-			 });
-					 
 			//saldo acumulado de A
 			$scope.saldoAcumuladoA += parseFloat(obj.valor);
-			
-			var usuarioA = {id : 1, username: 'anderson.pereira', password : '123456'};
 			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
-				id : 1,
-				usuario : usuarioA,
+				id : 5,
 				conifgJofo : jogo,
 				tipoPerfil : 'ADM',
 				saldoAcumulado : $scope.saldoAcumuladoA		
@@ -118,6 +101,37 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			error(function(data, status, headers, config) {
 				console.log("não deu :-(");
 			});
+			
+			// tranferencia do jogador B
+			var perfilB = {
+					id : 6,
+					conifgJofo : jogo,
+					tipoPerfil : 'INV',
+					saldoAcumulado : $scope.saldoAcumuladoA	
+						
+						//parseFloat(objSaldo.saldo)
+				};
+			var dataObj = {
+				id : null,
+				perfilJogador : perfilB,
+				envioJogador : parseFloat(obj.valor),
+				tempo : 1,
+				roundJogo : $scope.round,
+				tipoJogador : 'B',
+				conifgJofo : jogo,
+				saldoAcumulado : $scope.saldoAcumuladoA	
+					
+					//parseFloat(objSaldo.saldo)
+			};
+					
+			 $http({url: 'http://'+window.location.host+'/transferencia', method:"POST", data: dataObj}).
+			 success(function(data, status, headers, config) {
+				 console.log("deu certo");
+			 }).
+			 error(function(data, status, headers, config) {
+				 console.log("não deu :-(");
+			 });
+					 
 			if($scope.round == 5) {
 				$("#greetings").append(
 						"<tr><td></td><td>Fim do Jogo!</td></tr>");

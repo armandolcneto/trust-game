@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,19 +26,11 @@ public class TransferenciaJogo implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "jogador")
-	private Usuario usuario;
+	private PerfilJogador perfilJogador;
 	
 	@Column(name = "envio_jogador", nullable = false)
 	private float envioJogador;
 	
-//	public Integer getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(Integer usuario) {
-//		this.usuario = usuario;
-//	}
-
 	@Column(name = "tempo_envio_jogador", nullable = false)
 	private Integer tempo;
 	
@@ -49,21 +39,20 @@ public class TransferenciaJogo implements Serializable{
 	
 	@Column(name = "tipo_jogador", nullable = false)
 	private String tipoJogador;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_jogo")
+	private ConfigJogo conifgJofo;
 
+	@Column(name = "saldo_acumulado", nullable = false)
+	private float saldoAcumulado;
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 	
 	public float getEnvioJogador() {
@@ -98,4 +87,27 @@ public class TransferenciaJogo implements Serializable{
 		this.tipoJogador = tipoJogador;
 	}
 
+	public ConfigJogo getConifgJofo() {
+		return conifgJofo;
+	}
+
+	public void setConifgJofo(ConfigJogo conifgJofo) {
+		this.conifgJofo = conifgJofo;
+	}
+
+	public PerfilJogador getPerfilJogador() {
+		return perfilJogador;
+	}
+
+	public void setPerfilJogador(PerfilJogador perfilJogador) {
+		this.perfilJogador = perfilJogador;
+	}
+
+	public float getSaldoAcumulado() {
+		return saldoAcumulado;
+	}
+
+	public void setSaldoAcumulado(float saldoAcumulado) {
+		this.saldoAcumulado = saldoAcumulado;
+	}
 }

@@ -79,6 +79,14 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			return v;
 		});
 		
+//		var objSaldo =  JSON.parse(message, function(k, v, s){
+//			console.log(k); 
+//			return s;
+//		});
+		
+//		console.log(obj.valor);
+//		console.log(objSaldo.saldo);
+		
 		$scope.round += 1;
 		
 		if ($scope.round <= 5) {
@@ -90,39 +98,48 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			$scope.optionsJogador2 = $scope.generateOptions(obj.valor);
 			$('#valorEnviadoB').change();
            
-			// trânferencia do valor que A enviou
-			var usuarioA = {id : 1, username : 'anderson.pereira', password : '123456'};
-			var dataObj = {
-				id : null,
-				usuario : usuarioA,
-				envioJogador : parseFloat(obj.valor),
-				tempo : 1,
-				roundJogo : $scope.round,
-				tipoJogador : 'A'
-
-			};
-
-			$http({url : 'http://' + window.location.host + '/transferencia', method : "POST", data : dataObj}). 
-			success(function(data, status, headers, config) {
-				console.log("deu certo");
-			}).
-			error(function(data, status, headers, config) {
-				console.log("não deu :-(");
-			});
-
 			//Saldo Acumulado de B
 			$scope.saldoAcumuladoB += parseFloat(obj.valor);
-			var usuarioB = {id : 2,username : 'armando.neto', password : '123456'};
 			var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
-				id : 3,
-				usuario : usuarioB,
+				id : 6,
 				conifgJofo : jogo,
 				tipoPerfil : 'INV',
 				saldoAcumulado : $scope.saldoAcumuladoB
 			};
 
 			$http({url : 'http://' + window.location.host + '/saldoAcumulado', method : "POST", data : dataObj2}).
+			success(function(data, status, headers, config) {
+				console.log("deu certo");
+			}).
+			error(function(data, status, headers, config) {
+				console.log("não deu :-(");
+			});
+			
+			// trânferencia do valor que A enviou
+			var perfilA = {
+					id : 5,
+					conifgJofo : jogo,
+					tipoPerfil : 'ADM',
+					saldoAcumulado : $scope.saldoAcumuladoB
+						
+						//parseFloat(objSaldo.saldo)
+				};
+			var dataObj = {
+				id : null,
+				perfilJogador : perfilA,
+				envioJogador : parseFloat(obj.valor),
+				tempo : 1,
+				roundJogo : $scope.round,
+				tipoJogador : 'A',
+				conifgJofo : jogo,
+				saldoAcumulado : $scope.saldoAcumuladoB
+					
+					//parseFloat(objSaldo.saldo)
+
+			};
+
+			$http({url : 'http://' + window.location.host + '/transferencia', method : "POST", data : dataObj}). 
 			success(function(data, status, headers, config) {
 				console.log("deu certo");
 			}).

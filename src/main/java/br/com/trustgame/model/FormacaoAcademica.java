@@ -21,7 +21,7 @@ public class FormacaoAcademica implements Serializable{
 	@Column(name = "pk_formacao", nullable = false)
 	private int id;
 
-	@Column(name = "nome_formacao")
+	@Column(name = "nome_formacao", nullable = false)
 	private String nome;
 
 	public int getId() {

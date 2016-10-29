@@ -4,13 +4,15 @@ public class Menssagem {
 
     private String valorEnviado;
     private String user;
+    private String saldo;
 
     public Menssagem() {
     }
 
-    public Menssagem(String valorEnviado, String user) {
+    public Menssagem(String valorEnviado, String user, String saldo) {
         this.valorEnviado = valorEnviado;
         this.user = user;
+        this.saldo = saldo;
     }
 
     public String getvalorEnviado() {
@@ -28,4 +30,13 @@ public class Menssagem {
     public void setUser(String user) {
         this.user = user;
     }
+
+	public String getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(String saldo) {
+		this.saldo = saldo;
+	}
+    
 }

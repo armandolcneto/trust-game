@@ -21,19 +21,19 @@ public class DadosPessoais implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQGENERATOR")
 
 	@Id
-	@Column(name = "pk_pessoa", nullable = false)
+	@Column(name = "pk_dados_pessoais", nullable = false)
 	private int id;
 
-	@Column(name = "nome")
+	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "data_nascimento")
+	@Column(name = "data_nascimento", nullable = false)
 	private String dataNascimento;
 	
-	@Column(name = "sexo")
+	@Column(name = "sexo", nullable = false)
 	private String sexo;
 	
-	@Column(name = "experiencia_profisional")
+	@Column(name = "experiencia_profisional", nullable = false)
 	private Integer experiencia;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -43,6 +43,10 @@ public class DadosPessoais implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_profissao")
 	private AtuacaoProfissional atuacaoProfissional;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_perfil")
+	private PerfilJogador perfilJogador;
 
 	public int getId() {
 		return id;
@@ -99,5 +103,12 @@ public class DadosPessoais implements Serializable{
 	public void setAtuacaoProfissional(AtuacaoProfissional atuacaoProfissional) {
 		this.atuacaoProfissional = atuacaoProfissional;
 	}
-	
+
+	public PerfilJogador getPerfilJogador() {
+		return perfilJogador;
+	}
+
+	public void setPerfilJogador(PerfilJogador perfilJogador) {
+		this.perfilJogador = perfilJogador;
+	}	
 }

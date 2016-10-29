@@ -8,13 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "perfil")
+@Table(name = "book_kepping")
 public class BookKepping implements Serializable{
 
 	private static final long serialVersionUID = 3317339439073208844L;
@@ -26,8 +25,8 @@ public class BookKepping implements Serializable{
 	private int id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_usuario")
-	private Usuario usuario;
+	@JoinColumn(name = "fk_perfil")
+	private PerfilJogador perfilJogador;
 	
 	@Column(name = "book", nullable = false)
 	private String book;
@@ -40,14 +39,6 @@ public class BookKepping implements Serializable{
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public String getBook() {
 		return book;
 	}
@@ -56,4 +47,11 @@ public class BookKepping implements Serializable{
 		this.book = book;
 	}
 
+	public PerfilJogador getPerfilJogador() {
+		return perfilJogador;
+	}
+
+	public void setPerfilJogador(PerfilJogador perfilJogador) {
+		this.perfilJogador = perfilJogador;
+	}
 }

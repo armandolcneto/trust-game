@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,10 +25,6 @@ public class PerfilJogador implements Serializable{
 	private int id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_usuario")
-	private Usuario usuario;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_jogo")
 	private ConfigJogo conifgJofo;
 
@@ -38,21 +33,13 @@ public class PerfilJogador implements Serializable{
 	
 	@Column(name = "saldo_acumulado", nullable = false)
 	private float saldoAcumulado;
-
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public ConfigJogo getConifgJofo() {
@@ -78,5 +65,4 @@ public class PerfilJogador implements Serializable{
 	public void setSaldoAcumulado(float saldoAcumulado) {
 		this.saldoAcumulado = saldoAcumulado;
 	}
-
 }
