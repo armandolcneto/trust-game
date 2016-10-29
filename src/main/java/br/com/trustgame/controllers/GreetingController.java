@@ -15,16 +15,14 @@ public class GreetingController {
     @SendTo("/topic/greetings")
     public Greeting greeting(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        String msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser() +"\"}";
-        //msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser() + ","+"\"saldo\":\"" +message.getSaldo() +"\"}";
+        String msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser()+"\"" +","+"\"saldo\":"+ message.getSaldo() +"}";
         return new Greeting(msg);
     }
     @MessageMapping("/hello2")
     @SendTo("/topic/greetings2")
     public Greeting greeting2(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        String  msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser() +"\"}";
-       //msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser() + ","+"\"saldo\":\"" +message.getSaldo() +"\"}";
+        String  msg = "{\"valor\":" + message.getvalorEnviado() + ","+"\"user\":\"" +message.getUser()+"\"" +","+"\"saldo\":"+ message.getSaldo() +"}";
         return new Greeting(msg);
     }
     @MessageMapping("/hello3")

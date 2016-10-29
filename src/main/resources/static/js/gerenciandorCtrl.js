@@ -69,7 +69,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.sendNameB = function() {
 		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
 			'valorEnviado' : $("#valorEnviadoB").val(),
-			'user' : "Euler"
+			'user' : "Euler",
+			'saldo' : $scope.saldoAcumuladoB
 		}));	
 	}
 
@@ -78,14 +79,6 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			console.log(k);
 			return v;
 		});
-		
-//		var objSaldo =  JSON.parse(message, function(k, v, s){
-//			console.log(k); 
-//			return s;
-//		});
-		
-//		console.log(obj.valor);
-//		console.log(objSaldo.saldo);
 		
 		$scope.round += 1;
 		
@@ -121,9 +114,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 					id : 5,
 					conifgJofo : jogo,
 					tipoPerfil : 'ADM',
-					saldoAcumulado : $scope.saldoAcumuladoB
-						
-						//parseFloat(objSaldo.saldo)
+					saldoAcumulado : parseFloat(obj.saldo)
 				};
 			var dataObj = {
 				id : null,
@@ -133,9 +124,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 				roundJogo : $scope.round,
 				tipoJogador : 'A',
 				conifgJofo : jogo,
-				saldoAcumulado : $scope.saldoAcumuladoB
-					
-					//parseFloat(objSaldo.saldo)
+				saldoAcumulado : parseFloat(obj.saldo)
 
 			};
 
