@@ -44,7 +44,7 @@ public class TransferenciaJogo implements Serializable{
 	@JoinColumn(name = "fk_jogo")
 	private ConfigJogo conifgJofo;
 
-	@Column(name = "saldo_acumulado", nullable = false)
+	@Column(name = "saldo_envio_acumulados", nullable = false)
 	private float saldoAcumulado;
 	
 	public int getId() {

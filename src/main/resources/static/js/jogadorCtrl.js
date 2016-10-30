@@ -63,8 +63,10 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.sendNameA = function() {
 		$scope.stompClient.send("/app/hello2", {}, JSON.stringify({
 			'valorEnviado' : $("#valorEnviadoA").val() * 3,
-			'user': "Euler",
-			'saldo' : $scope.saldoAcumuladoA
+			'id_perfil': 5,
+			'nome' : "Anderson Pereira",
+			'grupo': "A",
+			'destino' : "http://"+window.location.host+"/gerenciador.html/id=6"
 		}));
 	}
 
@@ -103,7 +105,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 					id : 6,
 					conifgJofo : jogo,
 					tipoPerfil : 'INV',
-					saldoAcumulado : parseFloat(obj.saldo)
+					saldoAcumulado : $scope.saldoAcumuladoA
 				};
 			var dataObj = {
 				id : null,
@@ -113,7 +115,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 				roundJogo : $scope.round,
 				tipoJogador : 'B',
 				conifgJofo : jogo,
-				saldoAcumulado : parseFloat(obj.saldo)
+				saldoAcumulado : $scope.saldoAcumuladoA
 			};
 					
 			 $http({url: 'http://'+window.location.host+'/transferencia', method:"POST", data: dataObj}).
