@@ -104,16 +104,22 @@
 								<option>10</option>
 							</select> 
 							</div>
+							<div class="form-inline" ng-show="!tipoDoJogo">
+								<input type="button" ng-click="novo=false" /> 
+								<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaUnica()" ng-show="tipoDoJogo"  value="enviar"/>
+						   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
+							</div>
+							<div>
+								<button id="sendB" class="btn btn-default" type="submit">Enviar</button>
+							</div>
 						</div>
+						<div class="col-md-6">
+							<h4>Bloco de Notas</h4>
+							<textarea rows="10" style="width:100%"></textarea>
+						</div>
+							
 					</div>
-					<div class="form-inline" ng-show="!tipoDoJogo">
-						<input type="button" ng-click="novo=false" /> 
-						<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaUnica()" ng-show="tipoDoJogo"  value="enviar"/>
-				   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
-					</div>
-					<div>
-						<button id="sendB" class="btn btn-default" type="submit">Enviar</button>
-					</div>
+					
 					<div class="row">
 						<div class="col-md-12">
 							<table id="conversation" class="table table-striped">
