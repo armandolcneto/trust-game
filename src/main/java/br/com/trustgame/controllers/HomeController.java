@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.trustgame.model.AtuacaoProfissional;
+import br.com.trustgame.model.BookKepping;
 import br.com.trustgame.model.ConfigJogo;
 import br.com.trustgame.model.FormacaoAcademica;
 import br.com.trustgame.model.PerfilJogador;
 import br.com.trustgame.model.TransferenciaJogo;
 import br.com.trustgame.service.AtuacaoProfissionalService;
+import br.com.trustgame.service.BookKeppingService;
 import br.com.trustgame.service.ConfigJogoService;
 import br.com.trustgame.service.FormacaoAcademicaService;
 import br.com.trustgame.service.PerfilJogadorService;
@@ -42,6 +44,9 @@ public class HomeController {
 	
 	@Autowired
 	private PerfilJogadorService perfilJogadorService;
+	
+	@Autowired
+	private BookKeppingService bookKeppingService;
 	
 	private ModelAndView mav;
 	
@@ -106,6 +111,14 @@ public class HomeController {
 		perfilJogadorService.saldoAcumulado(data);
 		return HttpStatus.OK;
 	}	
+	
+	@RequestMapping(value = "/bookKepping", method = { RequestMethod.POST})
+	@ResponseBody
+	public HttpStatus bookKepping(@RequestBody BookKepping data){
+		bookKeppingService.bookKepping(data);
+		return HttpStatus.OK;
+	}
+	
 	
 //	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 //	public String index() {

@@ -72,7 +72,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			'id_perfil': 6,
 			'nome' : "Armando Neto",
 			'grupo': "B",
-			'destino' : "http://"+window.location.host+"/gerenciador.html/id=5"
+			'destino' : "http://"+window.location.host+"/gerenciador.html/id=5",
+			'book' : $("#bookKepping").val()
 		}));	
 	}
 
@@ -110,7 +111,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			error(function(data, status, headers, config) {
 				console.log("não deu :-(");
 			});
-			
+		
 			// trânferencia do valor que A enviou
 			var perfilA = {
 					id : 5,

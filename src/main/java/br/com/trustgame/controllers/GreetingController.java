@@ -15,7 +15,7 @@ public class GreetingController {
     @SendTo("/topic/greetings")
     public Greeting greeting(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        String msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+"}";
+        String msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+ ","+"\"book\":\"" +message.getBook()+"\""+"}";
         return new Greeting(msg);
     }
     @MessageMapping("/hello2")

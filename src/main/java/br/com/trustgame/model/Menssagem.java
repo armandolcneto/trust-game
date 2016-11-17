@@ -7,16 +7,18 @@ public class Menssagem {
     private String nome;
     private String grupo;
     private String destino;
+    private String book;
 
     public Menssagem() {
     }
 
-    public Menssagem(String valorEnviado, String id_perfil, String nome, String grupo, String destino) {
+    public Menssagem(String valorEnviado, String id_perfil, String nome, String grupo, String destino, String book) {
         this.valorEnviado = valorEnviado;
         this.id_perfil = id_perfil;
         this.nome = nome;
         this.grupo = grupo;
         this.destino = destino;
+        this.book = book;
     }
 
 	public String getValorEnviado() {
@@ -58,4 +60,13 @@ public class Menssagem {
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
+
+	public String getBook() {
+		return book;
+	}
+
+	public void setBook(String book) {
+		this.book = book;
+	}
+	
 }

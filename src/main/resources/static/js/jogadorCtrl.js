@@ -125,7 +125,30 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			 error(function(data, status, headers, config) {
 				 console.log("não deu :-(");
 			 });
-					 
+			 
+			// Book Kepping do jogador B
+			 var perfilB = {
+					id : 6,
+					conifgJofo : jogo,
+					tipoPerfil : 'INV',
+					saldoAcumulado : $scope.saldoAcumuladoA
+				};
+			var dataObj3 = {
+				id : null,
+				perfilJogador : perfilB,
+				book : obj.book,
+				roundJogo : $scope.round,
+				conifgJofo : jogo
+			};
+					
+			 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
+			 success(function(data, status, headers, config) {
+				 console.log("deu certo");
+			 }).
+			 error(function(data, status, headers, config) {
+				 console.log("não deu :-(");
+			 });
+				 
 			if($scope.round == 5) {
 				$("#greetings").append(
 						"<tr><td></td><td>Fim do Jogo!</td></tr>");

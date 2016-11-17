@@ -30,6 +30,13 @@ public class BookKepping implements Serializable{
 	
 	@Column(name = "book", nullable = false)
 	private String book;
+	
+	@Column(name = "round_jogo", nullable = false)
+	private Integer roundJogo;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_jogo")
+	private ConfigJogo configJogo;
 
 	public int getId() {
 		return id;
@@ -54,4 +61,21 @@ public class BookKepping implements Serializable{
 	public void setPerfilJogador(PerfilJogador perfilJogador) {
 		this.perfilJogador = perfilJogador;
 	}
+
+	public ConfigJogo getConfigJogo() {
+		return configJogo;
+	}
+
+	public void setConfigJogo(ConfigJogo configJogo) {
+		this.configJogo = configJogo;
+	}
+
+	public Integer getRoundJogo() {
+		return roundJogo;
+	}
+
+	public void setRoundJogo(Integer roundJogo) {
+		this.roundJogo = roundJogo;
+	}
+	
 }
