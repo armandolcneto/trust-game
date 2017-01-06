@@ -18,4 +18,8 @@ public class ConfigJogoService {
 	public List<ConfigJogo> getAll() {
 		return configJogoRepository.findAll();
 	}	
+
+	public void criarJogo(ConfigJogo data) {
+		configJogoRepository.save(data);
+	}
 }

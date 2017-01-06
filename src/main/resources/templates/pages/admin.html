@@ -18,12 +18,12 @@
 			  <form name="form" th:action="@{/admin}" action="/login" method="POST">
 			   <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="novoExperimento.nome" /><br />
 			   <label class="control-label requerido">Tipo</label>  
-			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="single" />Experimento 1x1</label></div>
-			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="multiplayer" />Experimento 5x5</label></div>
+			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="S" />Experimento 1x1</label></div>
+			   <div class="radio"><label><input name="tipo" type="radio" ng-model="novoExperimento.tipo" value="M" />Experimento 5x5</label></div>
 			    
 			    <div class="form-inline">
 			    	<input class="btn btn-default" type="button" ng-click="novo=false"  value="Cancelar"/>
-			    	<input class="btn btn-default btn-primary" type="button" ng-click="update(novoExperimento)" value="Criar" />
+			    	<input class="btn btn-default btn-primary" type="button" ng-click="criarExperimento()" value="Criar" />
 			    </div>
 			  </form>
 			</div>
@@ -32,7 +32,7 @@
 					<td ng-hide="true">{{ experimento.id }}</td>
 					<td>{{ experimento.nome }}</td>
 					<td>{{ experimento.tipo }}</td>
-					<td>{{ experimento.status }}</td>
+					
 				</tr>
 			</table>
 	  	</div>

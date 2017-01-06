@@ -119,6 +119,12 @@ public class HomeController {
 		return HttpStatus.OK;
 	}
 	
+	@RequestMapping(value = "/novoexperimento", method = { RequestMethod.POST})
+	@ResponseBody
+	public HttpStatus novoexperimento(@RequestBody ConfigJogo data){
+		configJogoService.criarJogo(data);
+		return HttpStatus.OK;
+	}
 	
 //	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 //	public String index() {

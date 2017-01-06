@@ -21,6 +21,9 @@ public class ConfigJogo implements Serializable{
 	@Column(name = "pk_jogo", nullable = false)
 	private int id;
 
+	@Column(name = "nome", nullable = false)
+	private String nome;
+	
 	@Column(name = "tipo_jogo", nullable = false)
 	private String tipoJogo;
 	
