@@ -66,7 +66,8 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			'id_perfil': 5,
 			'nome' : "Anderson Pereira",
 			'grupo': "A",
-			'destino' : "http://"+window.location.host+"/gerenciador.html/id=6"
+			'destino' : "http://"+window.location.host+"/gerenciador.html/id=6",
+			'book' : $("#bookKepping").val()
 		}));
 	}
 
@@ -78,9 +79,9 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 		
 		$scope.round += 1;
 		
-		if ($scope.round <= 5) {
-			$("#greetings").append("<tr><td>"+$scope.round + "º Round</td><td> " + 
-					"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>");
+		if ($scope.round <= 10) {
+			$("#greetings").append("<tr><td>"+$scope.round + "º Round - Agora é a sua vez de jogar!</td><td> " /*+ 
+					"Valor Recebido do Jogador B: R$"+ obj.valor+",00" + "</td></tr>"*/);
 			
 			//saldo acumulado de A
 			$scope.saldoAcumuladoA += parseFloat(obj.valor);
@@ -149,7 +150,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 				 console.log("não deu :-(");
 			 });
 				 
-			if($scope.round == 5) {
+			if($scope.round == 10) {
 				$("#greetings").append(
 						"<tr><td></td><td>Fim do Jogo!</td></tr>");
 			}

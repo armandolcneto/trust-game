@@ -75,6 +75,26 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			'destino' : "http://"+window.location.host+"/gerenciador.html/id=5",
 			'book' : $("#bookKepping").val()
 		}));	
+		
+		$scope.saldoAcumuladoB -= parseFloat($("#valorEnviadoB").val());
+		
+		//Saldo Acumulado de B
+		$scope.saldoAcumuladoB += parseFloat(obj.valor);
+		var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+		var dataObj2 = {
+			id : 6,
+			conifgJofo : jogo,
+			tipoPerfil : 'INV',
+			saldoAcumulado : $scope.saldoAcumuladoB
+		};
+		
+		$http({url : 'http://' + window.location.host + '/saldoAcumulado', method : "POST", data : dataObj2}).
+		success(function(data, status, headers, config) {
+			console.log("deu certo");
+		}).
+		error(function(data, status, headers, config) {
+			console.log("não deu :-(");
+		});
 	}
 
 	$scope.showGreeting = function(message) {
@@ -85,9 +105,9 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		
 		$scope.round += 1;
 		
-		if ($scope.round <= 5) {
-			$("#greetings2").append("<tr><td>" + $scope.round + "º Round</td><td> " + 
-					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>");
+		if ($scope.round <= 10) {
+			$("#greetings2").append("<tr><td>" + $scope.round + "º Round - Agora é a sua vez de jogar!</td><td> " /*+ 
+					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>"*/);
 			
 			//carregar combo do jogador B
 			$scope.optionsJogador2 = [];
@@ -103,7 +123,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 				tipoPerfil : 'INV',
 				saldoAcumulado : $scope.saldoAcumuladoB
 			};
-
+			
 			$http({url : 'http://' + window.location.host + '/saldoAcumulado', method : "POST", data : dataObj2}).
 			success(function(data, status, headers, config) {
 				console.log("deu certo");
@@ -138,8 +158,31 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			error(function(data, status, headers, config) {
 				console.log("não deu :-(");
 			});
+			
+			// Book Kepping do jogador A
+			 var perfilB = {
+					id : 5,
+					conifgJofo : jogo,
+					tipoPerfil : 'ADM',
+					saldoAcumulado : $scope.saldoAcumuladoB
+				};
+			var dataObj3 = {
+				id : null,
+				perfilJogador : perfilA,
+				book : obj.book,
+				roundJogo : $scope.round,
+				conifgJofo : jogo
+			};
+					
+			 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
+			 success(function(data, status, headers, config) {
+				 console.log("deu certo");
+			 }).
+			 error(function(data, status, headers, config) {
+				 console.log("não deu :-(");
+			 });
 
-			if ($scope.round == 5) {
+			if ($scope.round == 10) {
 				$("#greetings2")
 						.append(
 								"<tr><td></td><td>Fim do Jogo!</td></tr>");

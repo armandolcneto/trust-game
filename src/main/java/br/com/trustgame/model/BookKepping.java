@@ -36,7 +36,7 @@ public class BookKepping implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_jogo")
-	private ConfigJogo configJogo;
+	private ConfigJogo conifgJofo;
 
 	public int getId() {
 		return id;
@@ -62,12 +62,12 @@ public class BookKepping implements Serializable{
 		this.perfilJogador = perfilJogador;
 	}
 
-	public ConfigJogo getConfigJogo() {
-		return configJogo;
+	public ConfigJogo getConifgJofo() {
+		return conifgJofo;
 	}
 
-	public void setConfigJogo(ConfigJogo configJogo) {
-		this.configJogo = configJogo;
+	public void setConifgJofo(ConfigJogo conifgJofo) {
+		this.conifgJofo = conifgJofo;
 	}
 
 	public Integer getRoundJogo() {

@@ -15,14 +15,14 @@ public class GreetingController {
     @SendTo("/topic/greetings")
     public Greeting greeting(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        String msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+ ","+"\"book\":\"" +message.getBook()+"\""+"}";
+        String msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+ ","+"\"book\":\"" +message.getBook().replace("\n", "(ENTER)")+"\""+"}";
         return new Greeting(msg);
     }
     @MessageMapping("/hello2")
     @SendTo("/topic/greetings2")
     public Greeting greeting2(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        String  msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+"}";
+        String  msg = "{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+ ","+"\"book\":\"" +message.getBook().replace("\n", "(ENTER)")+"\""+"}";
         return new Greeting(msg);
     }
     @MessageMapping("/hello3")

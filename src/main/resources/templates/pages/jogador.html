@@ -37,7 +37,7 @@
 										{{option}},00</option>
 								</select>
 							</div>
-						</div>
+		
 						<div class="form-inline" ng-show="!tipoDoJogo">
 							Valor a ser repassado para jogador B1: <select
 								class="form-control">
@@ -101,22 +101,30 @@
 								<option>10</option>
 							</select>
 						</div>
+						<div class="form-inline" ng-show="!tipoDoJogo">
+								<input type="button" ng-click="novo=false" /> 
+								<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaUnica()" ng-show="tipoDoJogo"  value="enviar"/>
+						   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
+						</div>
+						<div>
+							<button id="sendA" class="btn btn-default" type="submit">Enviar</button>
+						</div>
+						</div>
+						<div class="col-md-6">
+								<h4>Bloco de Notas</h4>
+								<textarea id="bookKepping" rows="10" style="width:100%"></textarea>
+						</div>
 					</div>
-					<div class="form-inline" ng-show="!tipoDoJogo">
-						<input type="button" ng-click="novo=false" /> <input
-							type="button" ng-click="transferenciaUnica()"
-							ng-show="tipoDoJogo" /> <input type="button"
-							ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" />
-					</div>
-					<div>
-						<button id="sendA" class="btn btn-default" type="submit">Enviar</button>
-					</div>
+					
 					<div class="row">
 						<div class="col-md-12">
 							<table id="conversation" class="table table-striped">
 								<thead>
+								    <tr>
+								   		<th>Saldo Acumulado:R$ {{saldoAcumuladoA}},00</th>
+									</tr>
 									<tr>
-										<th>Transfer&ecirc;ncias</th>
+										<th>Rounds</th>
 									</tr>
 								</thead>
 								<tbody id="greetings"></tbody>
