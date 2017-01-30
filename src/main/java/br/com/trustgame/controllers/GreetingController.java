@@ -36,7 +36,7 @@ public class GreetingController {
     @SendTo("/topic/greetings4")
     public Greeting greeting4(Menssagem message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        return new Greeting("{\"valor\":" + message.getValorEnviado() +","+"\"id_perfil\":"+ message.getId_perfil() + ","+"\"nome\":\"" +message.getNome()+"\"" + ","+"\"grupo\":\"" +message.getGrupo()+"\""+ ","+"\"destino\":\"" +message.getDestino()+"\""+"}");
+        return new Greeting("{\"saldo\":" + message.getValorEnviado()+"\""+"}");
     }
 
 

@@ -5,6 +5,9 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.repasseJogador2 = [];
 	$scope.round = 0;
 	$scope.saldoAcumuladoB = 0;
+	$scope.saldoRodadaB = 0;
+	$scope.msgsaldoRodada = "Aguarde o jogado A começar o jogo!";
+	$scope.Rodadas = "";
 
 	$scope.generateOptions = function(value) {
 		var array = [];
@@ -77,9 +80,9 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		}));	
 		
 		$scope.saldoAcumuladoB -= parseFloat($("#valorEnviadoB").val());
-		
+		$scope.saldoRodadaB -= parseFloat($("#valorEnviadoB").val());
+		$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
 		//Saldo Acumulado de B
-		$scope.saldoAcumuladoB += parseFloat(obj.valor);
 		var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 		var dataObj2 = {
 			id : 6,
@@ -95,18 +98,28 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		error(function(data, status, headers, config) {
 			console.log("não deu :-(");
 		});
+		
+		if ($scope.round < 10) {
+			$scope.fimround = "Fim do "+$scope.round+"º round - Espere o envio do jogador A!";
+		}else{
+			$scope.fimround = "Fim do Jogo!";
+		}
+		
+		$scope.optionsJogador2 = [];
+
 	}
 
 	$scope.showGreeting = function(message) {
-		var obj = JSON.parse(message, function(k, v) {
+		var obj = JSON.parse(message, function(k, v) { 
 			console.log(k);
 			return v;
 		});
 		
 		$scope.round += 1;
+		$scope.saldoRodadaB = 0;
 		
 		if ($scope.round <= 10) {
-			$("#greetings2").append("<tr><td>" + $scope.round + "º Round - Agora é a sua vez de jogar!</td><td> " /*+ 
+			$("#greetings2").append("<tr><td>" + $scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>"*/);
 			
 			//carregar combo do jogador B
@@ -116,6 +129,10 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
            
 			//Saldo Acumulado de B
 			$scope.saldoAcumuladoB += parseFloat(obj.valor);
+			$scope.saldoRodadaB += parseFloat(obj.valor);
+			$scope.Rodadas = "Rounds";
+			$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
+			//Saldo do {{round}}&ordm; Round: R$ {{saldoRodadaB}},00
 			var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
 				id : 6,
@@ -181,15 +198,12 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			 error(function(data, status, headers, config) {
 				 console.log("não deu :-(");
 			 });
-
-			if ($scope.round == 10) {
-				$("#greetings2")
-						.append(
-								"<tr><td></td><td>Fim do Jogo!</td></tr>");
-			}
+			 
+			 
+			 $scope.fimround = "";
+			 
 		}
 	}
-	
 
 	$scope.showCanal = function() {
 		console.log($scope.stompClient.ws);

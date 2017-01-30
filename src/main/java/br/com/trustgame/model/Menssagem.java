@@ -8,6 +8,7 @@ public class Menssagem {
     private String grupo;
     private String destino;
     private String book;
+//    private String saldoRodada;
 
     public Menssagem() {
     }
@@ -68,5 +69,13 @@ public class Menssagem {
 	public void setBook(String book) {
 		this.book = book;
 	}
+
+//	public String getSaldoRodada() {
+//		return saldoRodada;
+//	}
+
+//	public void setSaldoRodada(String saldoRodada) {
+//		this.saldoRodada = saldoRodada;
+//	}
 	
 }
