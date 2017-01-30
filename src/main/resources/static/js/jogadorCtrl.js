@@ -6,9 +6,11 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.round = 0;
 	$scope.saldoAcumuladoA = 10;
 	$scope.saldoRodadaA = 10;
+	$scope.montante = 10;
 	$scope.saldotransferenciaA = 0;
 	$scope.msgsaldoRodada = "Envie um valor para o jogador B e aguarde o retorno!";
-	$scope.msgsaldoRodada2 = "Montante Inicial: ";
+	$scope.montanteRodada = "Montante Inicial por Rounds: ";
+	$scope.msgsaldoRodada2 = "Saldo Inicial: ";
 	$scope.Rodadas = "";
 
 	$scope.update = function(experimento) {
@@ -75,14 +77,15 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			'book' : $("#bookKepping").val()
 		}));
 		
+		$scope.montante = 10;
 		$scope.msgsaldoRodada = "";
+		$scope.montanteRodada = "Montante Inicial por Rounds: ";
 		
 		   if ($scope.round > 1) {
 				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
 				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
 		   }
 			if ($scope.round == 0){
-				$scope.msgsaldoRodada2 = "Montante Inicial: ";
 				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
 				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
 			}else{
