@@ -6,6 +6,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.round = 0;
 	$scope.saldoAcumuladoA = 10;
 	$scope.saldoRodadaA = 10;
+	$scope.saldotransferenciaA = 0;
 	$scope.msgsaldoRodada = "Envie um valor para o jogador B e aguarde o retorno!";
 	$scope.msgsaldoRodada2 = "Montante Inicial: ";
 	$scope.Rodadas = "";
@@ -74,14 +75,25 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			'book' : $("#bookKepping").val()
 		}));
 		
-		if ($scope.round > 0 && $scope.round <=10) {
-			$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
-			$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
-			$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
-			if ($scope.round < 9){
+		$scope.msgsaldoRodada = "";
+		
+		   if ($scope.round > 1) {
+				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
+				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+		   }
+			if ($scope.round == 0){
+				$scope.msgsaldoRodada2 = "Montante Inicial: ";
+				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
+				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+			}else{
+				$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
+			}
+			if ($scope.round > 0 && $scope.round < 9){
 				$scope.fimround = "Fim do "+$scope.round+"º round - Espere o envio do jogador B!";
 			}else{
-				$scope.fimround = "Última rodada do jogo!";
+				if ($scope.round > 0){
+					$scope.fimround = "Última rodada do jogo!";
+				}	
 			}
 			
 			//saldo acumulado de A
@@ -100,7 +112,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			error(function(data, status, headers, config) {
 				console.log("não deu :-(");
 			});
-		}
+		//}
 	}
 
 	$scope.showGreeting = function(message) {
@@ -110,15 +122,18 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 		});
 		
 		$scope.round += 1;
-		$scope.saldoRodadaA = 10;
-		
+				
 		if ($scope.round <= 10) {
+			if ($scope.round > 1){
+				$scope.saldoRodadaA = 10;
+			}
 			$("#greetings").append("<tr><td>"+$scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador B: R$"+ obj.valor+",00"+ "</td></tr>"*/);
 			
 			//saldo acumulado de A
 			$scope.saldoAcumuladoA += parseFloat(obj.valor);
 			$scope.saldoRodadaA += parseFloat(obj.valor);
+			$scope.saldotransferenciaA += parseFloat(obj.valor);
 			$scope.Rodadas = "Rounds";
 			$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
 			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
@@ -142,7 +157,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 					id : 6,
 					conifgJofo : jogo,
 					tipoPerfil : 'INV',
-					saldoAcumulado : $scope.saldoAcumuladoA
+					saldoAcumulado : $scope.saldotransferenciaA
 				};
 			var dataObj = {
 				id : null,
@@ -152,7 +167,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 				roundJogo : $scope.round,
 				tipoJogador : 'B',
 				conifgJofo : jogo,
-				saldoAcumulado : $scope.saldoAcumuladoA
+				saldoAcumulado : $scope.saldotransferenciaA
 			};
 					
 			 $http({url: 'http://'+window.location.host+'/transferencia', method:"POST", data: dataObj}).
@@ -187,6 +202,10 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			 });
 				 
 			 $scope.fimround = "";
+			 
+			 if ($scope.round == 10){
+					$scope.fimround = "Fim do Jogo!";
+			 }
 		}
 	}
 
