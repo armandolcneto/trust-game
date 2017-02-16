@@ -108,6 +108,12 @@ a:hover, a:focus {
 
 }
 
+.jogador{
+	padding: 10px;
+	border: 1px solid #CCC;
+	margin-bottom: 10px;
+}
+
 .textfooter{
     text-align: right;
     color: #ffffff;

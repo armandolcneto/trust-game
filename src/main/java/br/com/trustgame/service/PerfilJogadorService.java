@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.trustgame.model.ConfigJogo;
 import br.com.trustgame.model.PerfilJogador;
 import br.com.trustgame.model.TransferenciaJogo;
 import br.com.trustgame.repository.PerfilJogadorRepository;
@@ -24,5 +25,14 @@ public class PerfilJogadorService {
 	
 	public void saldoAcumulado(PerfilJogador saldoAcumulado){ 
 		perfilJogadorRepository.save(saldoAcumulado);
+	}
+
+	public void criarPerfil(ConfigJogo jogo,String tipo) {
+		PerfilJogador perfil = new PerfilJogador();
+		perfil.setTipoPerfil(tipo);
+		perfil.setConifgJofo(jogo);
+		perfil.setSaldoAcumulado(0);
+		perfilJogadorRepository.save(perfil);
+		
 	}
 }

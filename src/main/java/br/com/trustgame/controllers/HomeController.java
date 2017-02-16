@@ -126,6 +126,16 @@ public class HomeController {
 		return HttpStatus.OK;
 	}
 	
+	
+	@RequestMapping(value = "/criarUsuario", method = { RequestMethod.POST})
+	@ResponseBody
+	public HttpStatus novoexperimento(@RequestBody String data){
+		perfilJogadorService.criarPerfil (data);
+		
+		return HttpStatus.OK;
+	}
+	
+	
 //	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 //	public String index() {
 //		return "pages/home";
