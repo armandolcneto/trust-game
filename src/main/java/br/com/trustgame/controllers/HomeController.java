@@ -130,7 +130,7 @@ public class HomeController {
 	@RequestMapping(value = "/criarUsuario", method = { RequestMethod.POST})
 	@ResponseBody
 	public HttpStatus novoexperimento(@RequestBody String data){
-		perfilJogadorService.criarPerfil (data);
+		perfilJogadorService.criarPerfil (null, data);
 		
 		return HttpStatus.OK;
 	}
