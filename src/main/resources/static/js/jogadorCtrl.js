@@ -16,6 +16,23 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.update = function(experimento) {
 
 	};
+	
+	function showBookKeeping(){
+		return true;
+//		if ($scope.Rodadas > 10){
+//			if (perfil.bookKepping)
+//			{	
+//				return true;
+//				
+//			}
+//			else{
+//				return false;
+//			}
+//		}
+//		else{
+//			return false;
+//		}
+	}
 
 	angular.element(document).ready(function() {
 		$("form").on('submit', function(e) {

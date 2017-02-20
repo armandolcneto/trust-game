@@ -31,16 +31,17 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 		if(!$scope.novoExperimento){
 			$scope.criarExperimento();
 		}
-	}
-		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : tipo). 
-//		success(function(data, status, headers, config) {
-//			console.log("deu certo");
-//		}).
-//		error(function(data, status, headers, config) {
-//			console.log("não deu :-(");
-//		});
-		console.log("ACERTOOOOO MISERAVEL");
-		
+		var inData  = {'jogo': $scope.novoExperimento, 'tipo': tipo};
+		$http.post('http://' + window.location.host + '/criarUsuario', inData). 	
+			success(function(data, status, headers, config) {
+					if(data.perfil.tipo == 'investidor')
+						jogador1 = data.perfil;
+					else
+						jogador2 = data.perfil;
+			}).
+			error(function(data, status, headers, config) {
+				console.log("não deu :-(");
+		});
 	}
 	
 	$scope.criarExperimento = function() {

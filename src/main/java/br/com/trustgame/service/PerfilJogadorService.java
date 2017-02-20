@@ -27,12 +27,14 @@ public class PerfilJogadorService {
 		perfilJogadorRepository.save(saldoAcumulado);
 	}
 
-	public void criarPerfil(ConfigJogo jogo,String tipo) {
+	public PerfilJogador criarPerfil(String parametros) {
+		
 		PerfilJogador perfil = new PerfilJogador();
-		perfil.setTipoPerfil(tipo);
-		perfil.setConifgJofo(jogo);
+	//	perfil.setTipoPerfil(tipo);
+	//	perfil.setConifgJofo(jogo);
 		perfil.setSaldoAcumulado(0);
 		perfilJogadorRepository.save(perfil);
+		return perfil;
 		
 	}
 }

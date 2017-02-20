@@ -8,7 +8,25 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.saldoRodadaB = 0;
 	$scope.msgsaldoRodada = "Aguarde o jogado A começar o jogo!";
 	$scope.Rodadas = "";
-
+	
+	//$scope.perfil = perfil;
+	
+	function showBookKeeping(){
+//		if ($scope.Rodadas > 10){
+//			if (perfil.bookKepping)
+//			{	
+//				return true;
+//				
+//			}
+//			else{
+//				return false;
+//			}
+//		}
+//		else{
+//			return false;
+//		}
+	}
+	
 	$scope.generateOptions = function(value) {
 		var array = [];
 		for (var i = 0; i < value; i++) {
