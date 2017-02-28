@@ -32,16 +32,14 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 			$scope.criarExperimento();
 		}
 	}
-		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : tipo). 
-//		success(function(data, status, headers, config) {
-//			console.log("deu certo");
-//		}).
-//		error(function(data, status, headers, config) {
-//			console.log("não deu :-(");
-//		});
+		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : tipo}). 
+		success(function(data, status, headers, config) {
+			console.log("deu certo");
+		}).
+		error(function(data, status, headers, config) {
+			console.log("não deu :-(");
+		});
 		console.log("ACERTOOOOO MISERAVEL");
-		
-	}
 	
 	$scope.criarExperimento = function() {
 	

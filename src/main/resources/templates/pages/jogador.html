@@ -107,10 +107,10 @@
 						   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
 						</div>
 						<div>
-							<button id="sendA" class="btn btn-default" type="submit">Enviar</button>
+							<button id="sendA" class="btn btn-default" type="submit" ng-disabled="desabilitaBotao">Enviar</button>
 						</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6" ng-show="Rodadas">
 								<h4>Bloco de Notas</h4>
 								<textarea id="bookKepping" rows="10" style="width:100%"></textarea>
 						</div>
@@ -121,19 +121,19 @@
 							<table id="conversation" class="table table-striped">
 								<thead>
 								     <tr>
-								   		<th>{{montanteRodada}}R$ {{montante}},00 <br/> {{msgsaldoRodada}}</th>
+								   		<th><font color="red">{{msgsaldoRodada}}</font></th>
 									</tr>
 								     <tr>
-								   		<th>{{msgsaldoRodada2}}R$ {{saldoRodadaA}},00 <br/></th>
+								   		<th>{{valorEnviadoB}}<br/></th>
 									</tr>
 									<tr>
-								   		<th>{{fimround}}</th>
+								   		<th ng-show="proxima">{{valorRecebidoB}}</th>
 									</tr>
-									<tr>
-										<th>{{Rodadas}}</th>
-									</tr>
+									<!--<tr ng-show="proxima">
+										<th><button id="proximaA" class="btn btn-default" type="reset">Iniciar pr&oacute;xima rodada</button></th>
+									</tr>-->
 								</thead>
-								<tbody id="greetings"></tbody>
+								<!--<tbody id="greetings"></tbody>-->
 							</table>
 						</div>
 					</div>
