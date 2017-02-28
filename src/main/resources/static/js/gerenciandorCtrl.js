@@ -117,7 +117,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			console.log("não deu :-(");
 		});
 		
-		if ($scope.round < 10) {
+		if ($scope.round < 20) {
 			$scope.fimround = "Fim do "+$scope.round+"º round - Espere o envio do jogador A!";
 		}else{
 			$scope.fimround = "Fim do Jogo!";
@@ -136,7 +136,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		$scope.round += 1;
 		$scope.saldoRodadaB = 0;
 		
-		if ($scope.round <= 10) {
+		if ($scope.round <= 20) {
 			$("#greetings2").append("<tr><td>" + $scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>"*/);
 			
