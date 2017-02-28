@@ -14,7 +14,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.Rodadas = false;
 	$scope.proxima = false;
 	$scope.valorEnviadoB ="";
-	$scope.valorRecebidoB ="";
+	$scope.valorRecebidoB =""; 
 	
 	$scope.update = function(experimento) {
 
