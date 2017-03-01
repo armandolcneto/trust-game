@@ -85,7 +85,8 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 		$scope.montanteRodada = "Montante Inicial por Rounds: ";
 	    $scope.valorEnviadoB = "Valor Enviado para o Jogador B: R$ "+$("#valorEnviadoA").val()+",00";
 		
-		   if ($scope.round > 1) {
+		   if ($scope.round >= 1) {
+			    $scope.saldoRodadaA = 10;
 			    $scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
 				$scope.saldoAcumuladoA += $scope.saldoRodadaA
 		   }
@@ -133,9 +134,6 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 		$scope.round += 1;
 				
 		if ($scope.round <= 20) {
-			if ($scope.round > 1){
-				$scope.saldoRodadaA = 10;
-			}
 			$("#greetings").append("<tr><td>"+$scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador B: R$"+ obj.valor+",00"+ "</td></tr>"*/);
 			
