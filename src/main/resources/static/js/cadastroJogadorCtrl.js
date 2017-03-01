@@ -22,15 +22,15 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 				id : $scope.perfilJogador,
 				conifgJofo : jogo,
 				tipoPerfil : $scope.tipoJogador,
-				saldo_acumulado : 0
-		}
+				saldo_acumulado : parseFloat(0)
+		};
 		
 		var dataObj2 = {
 			id : null,
 			nome : $scope.nome,
-			dataNascimento : $scope.dataNascimento,
+			dataNascimento : Date.parse($scope.dataNascimento),
 			sexo : $scope.sexo,
-			experiencia : $scope.experiencia,
+			experiencia : parseInt($scope.experiencia),
 			formacaoAcedemica : $scope.formacaoAcademica,
 			atuacaoProfissional : $scope.atuacaoProfissional,
 			perfilJogador : perfil

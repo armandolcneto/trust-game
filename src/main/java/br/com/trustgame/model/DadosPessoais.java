@@ -1,6 +1,8 @@
 package br.com.trustgame.model;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +30,7 @@ public class DadosPessoais implements Serializable{
 	private String nome;
 	
 	@Column(name = "data_nascimento", nullable = false)
-	private String dataNascimento;
+	private Date dataNascimento;
 	
 	@Column(name = "sexo", nullable = false)
 	private String sexo;
@@ -62,14 +64,6 @@ public class DadosPessoais implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public String getSexo() {
@@ -110,5 +104,14 @@ public class DadosPessoais implements Serializable{
 
 	public void setPerfilJogador(PerfilJogador perfilJogador) {
 		this.perfilJogador = perfilJogador;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}	
+	
 }
