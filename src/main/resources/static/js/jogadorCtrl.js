@@ -4,7 +4,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.optionsJogador1 = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 	$scope.repasseJogador1 = [];
 	$scope.round = 0;
-	$scope.saldoAcumuladoA = 10;
+	$scope.saldoAcumuladoA = 0;
 	$scope.saldoRodadaA = 10;
 	$scope.montante = 10;
 	$scope.saldotransferenciaA = 0;
@@ -86,12 +86,12 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	    $scope.valorEnviadoB = "Valor Enviado para o Jogador B: R$ "+$("#valorEnviadoA").val()+",00";
 		
 		   if ($scope.round > 1) {
-				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
-				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+			    $scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+				$scope.saldoAcumuladoA += $scope.saldoRodadaA
 		   }
 			if ($scope.round == 0){
-				$scope.saldoAcumuladoA -= parseFloat($("#valorEnviadoA").val());
-				$scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+				 $scope.saldoRodadaA -= parseFloat($("#valorEnviadoA").val());
+				 $scope.saldoAcumuladoA += $scope.saldoRodadaA
 			}else{
 				$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
 			}
@@ -131,10 +131,6 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 		});
 		
 		$scope.round += 1;
-		
-		if ($scope.round > 9){
-			$scope.Rodadas = true;
-		}
 				
 		if ($scope.round <= 20) {
 			if ($scope.round > 1){
@@ -193,29 +189,34 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 				 console.log("não deu :-(");
 			 });
 			 
-			// Book Kepping do jogador B
-			 var perfilB = {
-					id : 6,
-					conifgJofo : jogo,
-					tipoPerfil : 'INV',
-					saldoAcumulado : $scope.saldoAcumuladoA
+			 if ($scope.round > 9){
+				$scope.Rodadas = true;
+			 }		
+			 if ($scope.round > 10){	
+				// Book Kepping do jogador B
+				 var perfilB = {
+						id : 6,
+						conifgJofo : jogo,
+						tipoPerfil : 'INV',
+						saldoAcumulado : $scope.saldoAcumuladoA
+					};
+				var dataObj3 = {
+					id : null,
+					perfilJogador : perfilB,
+					book : obj.book,
+					roundJogo : $scope.round,
+					conifgJofo : jogo
 				};
-			var dataObj3 = {
-				id : null,
-				perfilJogador : perfilB,
-				book : obj.book,
-				roundJogo : $scope.round,
-				conifgJofo : jogo
-			};
-					
-			 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
-			 success(function(data, status, headers, config) {
-				 console.log("deu certo");
-			 }).
-			 error(function(data, status, headers, config) {
-				 console.log("não deu :-(");
-			 });
-				 
+						
+				 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
+				 success(function(data, status, headers, config) {
+					 console.log("deu certo");
+				 }).
+				 error(function(data, status, headers, config) {
+					 console.log("não deu :-(");
+				 });
+			 }
+			 
 			 $scope.fimround = "";
 			 
 			 if ($scope.round == 20){

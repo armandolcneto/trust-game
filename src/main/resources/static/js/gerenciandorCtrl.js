@@ -148,9 +148,6 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			$("#greetings2").append("<tr><td>" + $scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>"*/);
 			
-			if ($scope.round > 10){
-				$scope.Rodadas = true;
-			}
 			
 			//carregar combo do jogador B
 			$scope.optionsJogador2 = [];
@@ -208,29 +205,32 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 				console.log("não deu :-(");
 			});
 			
-			// Book Kepping do jogador A
-			 var perfilB = {
-					id : 5,
-					conifgJofo : jogo,
-					tipoPerfil : 'ADM',
-					saldoAcumulado : $scope.saldoAcumuladoB
+			if ($scope.round > 10){
+				$scope.Rodadas = true;
+			
+				// Book Kepping do jogador A
+				 var perfilB = {
+						id : 5,
+						conifgJofo : jogo,
+						tipoPerfil : 'ADM',
+						saldoAcumulado : $scope.saldoAcumuladoB
+					};
+				var dataObj3 = {
+					id : null,
+					perfilJogador : perfilA,
+					book : obj.book,
+					roundJogo : $scope.round,
+					conifgJofo : jogo
 				};
-			var dataObj3 = {
-				id : null,
-				perfilJogador : perfilA,
-				book : obj.book,
-				roundJogo : $scope.round,
-				conifgJofo : jogo
-			};
-					
-			 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
-			 success(function(data, status, headers, config) {
-				 console.log("deu certo");
-			 }).
-			 error(function(data, status, headers, config) {
-				 console.log("não deu :-(");
-			 });
-			 
+						
+				 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
+				 success(function(data, status, headers, config) {
+					 console.log("deu certo");
+				 }).
+				 error(function(data, status, headers, config) {
+					 console.log("não deu :-(");
+				 });
+			}	 
 			 
 			 $scope.fimround = "";
 			 
