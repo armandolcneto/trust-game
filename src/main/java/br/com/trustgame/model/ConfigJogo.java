@@ -33,8 +33,8 @@ public class ConfigJogo implements Serializable{
 	@Column(name = "qtd_pessoas", nullable = false)
 	private Integer qtdpessoas;
 	
-	@Column(name = "multiplicador", nullable = false)
-	private Integer mutiplicador;
+	@Column(name = "mutiplicador", nullable = false)
+	private Integer multiplicador;
 	
 	@Column(name = "conversao_moeda", nullable = false)
 	private float conversaoMoeda;
@@ -71,12 +71,12 @@ public class ConfigJogo implements Serializable{
 		this.qtdpessoas = qtdpessoas;
 	}
 
-	public Integer getMutiplicador() {
-		return mutiplicador;
+	public Integer getMultiplicador() {
+		return multiplicador;
 	}
 
-	public void setMutiplicador(Integer mutiplicador) {
-		this.mutiplicador = mutiplicador;
+	public void setMutiplicador(Integer multiplicador) {
+		this.multiplicador = multiplicador;
 	}
 
 	public float getConversaoMoeda() {
