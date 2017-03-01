@@ -38,7 +38,11 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		
 		$http({url : 'http://' + window.location.host + '/cadastroJogador', method : "POST", data : dataObj2}).
 		success(function(data, status, headers, config) {
-			console.log("deu certo");
+			if ($scope.tipoJogador == 'ADM'){
+				window.location.href = 'http://' + window.location.host + '/jogador';
+			}else{
+				window.location.href = 'http://' + window.location.host + '/gerenciador';
+			}
 		}).
 		error(function(data, status, headers, config) {
 			console.log("não deu :-(");
