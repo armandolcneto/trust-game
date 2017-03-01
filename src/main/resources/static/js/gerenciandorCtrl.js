@@ -6,8 +6,11 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.round = 0;
 	$scope.saldoAcumuladoB = 0;
 	$scope.saldoRodadaB = 0;
-	$scope.msgsaldoRodada = "Aguarde o jogado A começar o jogo!";
-	$scope.Rodadas = "";
+	$scope.msgsaldoRodada = "Aguarde o envio do jogador A para fazer seu envio!";
+	$scope.Rodadas = false;
+	$scope.proxima = false;
+	$scope.valorEnviadoA ="";
+	$scope.valorRecebidoA ="";
 	
 	//$scope.perfil = perfil;
 	
@@ -99,7 +102,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		
 		$scope.saldoAcumuladoB -= parseFloat($("#valorEnviadoB").val());
 		$scope.saldoRodadaB -= parseFloat($("#valorEnviadoB").val());
-		$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
+		//$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
+		$scope.valorEnviadoA = "Valor Enviado para o Jogador A: R$ "+$("#valorEnviadoB").val()+",00";
 		//Saldo Acumulado de B
 		var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 		var dataObj2 = {
@@ -118,12 +122,16 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		});
 		
 		if ($scope.round < 20) {
-			$scope.fimround = "Fim do "+$scope.round+"º round - Espere o envio do jogador A!";
+			$scope.msgsaldoRodada = "Aguarde o envio do jogador A para fazer seu envio!";
 		}else{
-			$scope.fimround = "Fim do Jogo!";
+			$scope.desabilitaBotao = true;
+			$scope.msgsaldoRodada = "Fim do Jogo!";
 		}
 		
 		$scope.optionsJogador2 = [];
+		
+		$scope.desabilitaBotao = true;
+		$scope.proxima = true;
 
 	}
 
@@ -140,16 +148,22 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			$("#greetings2").append("<tr><td>" + $scope.round + "º Round</td></tr>" /*- Agora é a sua vez de jogar!</td><td> "+ 
 					"Valor Recebido do Jogador A: R$" + obj.valor + ",00" + "</td></tr>"*/);
 			
+			if ($scope.round > 10){
+				$scope.Rodadas = true;
+			}
+			
 			//carregar combo do jogador B
 			$scope.optionsJogador2 = [];
 			$scope.optionsJogador2 = $scope.generateOptions(obj.valor);
 			$('#valorEnviadoB').change();
-           
+			$scope.valorRecebidoA = "Valor Recebido pelo o Jogador A: R$ "+obj.valor+",00";
+			$scope.proxima = false;
+			$scope.desabilitaBotao = false;
 			//Saldo Acumulado de B
 			$scope.saldoAcumuladoB += parseFloat(obj.valor);
 			$scope.saldoRodadaB += parseFloat(obj.valor);
-			$scope.Rodadas = "Rounds";
-			$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
+			//$scope.Rodadas = "Rounds";
+			$scope.msgsaldoRodada = "";
 			//Saldo do {{round}}&ordm; Round: R$ {{saldoRodadaB}},00
 			var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {

@@ -110,10 +110,10 @@
 						   		<input class="btn btn-default btn-primary" type="button" ng-click="transferenciaMultipla()" ng-show="!tipoDoJogo" value="Enviar"/>
 							</div>
 							<div>
-								<button id="sendB" class="btn btn-default" type="submit">Enviar </button>
+								<button id="sendB" class="btn btn-default" type="submit" ng-disabled="desabilitaBotao">Enviar </button>
 							</div>
 						</div>
-						<div class="col-md-6" ng-show="showBookKeeping();">
+						<div class="col-md-6" ng-show="showBookKeeping();Rodadas;">
 							<h4>Bloco de Notas</h4>
 							<textarea id="bookKepping" rows="10" style="width:100%"></textarea>
 						</div>
@@ -125,16 +125,16 @@
 							<table id="conversation" class="table table-striped">
 								<thead>
 								    <tr>
-								   		<th>{{msgsaldoRodada}}</th>
+								   		<th><font color="red">{{msgsaldoRodada}}</font></th>
+									</tr>
+								     <tr>
+								   		<th>{{valorRecebidoA}}<br/></th>
 									</tr>
 									<tr>
-								   		<th>{{fimround}}</th>
-									</tr>
-									<tr>
-										<th>{{Rodadas}}</th>
+								   		<th ng-show="proxima">{{valorEnviadoA}}</th>
 									</tr>
 								</thead>
-								<tbody id="greetings2"></tbody>
+								<!--<tbody id="greetings2"></tbody>-->
 							</table>
 						</div>
 					</div>

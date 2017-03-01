@@ -95,7 +95,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			}else{
 				$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
 			}
-			if ($scope.round > 0 && $scope.round < 9){
+			if ($scope.round > 0 && $scope.round < 19){
 				$scope.fimround = "Fim do "+$scope.round+"º round - Espere o envio do jogador B!";
 			}else{
 				if ($scope.round > 0){
@@ -219,6 +219,7 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			 $scope.fimround = "";
 			 
 			 if ($scope.round == 20){
+				 $scope.desabilitaBotao = true;
 				 $scope.msgsaldoRodada = "Fim do Jogo!";
 			 }else{
 				 $scope.msgsaldoRodada = "Envie um valor para o jogador B e aguarde o retorno!";
