@@ -17,15 +17,22 @@
 	    	<div>
 			  <form name="form" th:action="@{/cadastroJogador}" action="/login" method="POST">
 			  <div class="form-group col-md-6">
-
-			    <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="jogador.nome" /><br />
-			    <label class="control-label requerido">Data de Nascimento</label> <input class="form-control" type="text" ng-model="jogador.dataNascimento" /><br />
+                
+                <label class="control-label requerido">Informe seu ID</label> <input class="form-control" type="text" ng-model="perfilJogador" /><br />
+                <label class="control-label requerido">Informe o ID do jogo</label> <input class="form-control" type="text" ng-model="jogoId" /><br />
+                <label class="control-label requerido">Informe o tipo de jogador</label>
+                <select class="form-control" ng-model="tipoJogador">
+				  <option value="ADM">Administrador</option>
+				  <option value="INV">Investidor</option>
+				</select>
+			    <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="nome" /><br />
+			    <label class="control-label requerido">Data de Nascimento</label> <input class="form-control" type="text" ng-model="dataNascimento" /><br />
 			    Sexo: 
-			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="jogador.sexo" value="m" />Masculino</label></div>
-			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="jogador.sexo" value="f" />Feminino</label></div><br /><br/>
+			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="M" />Masculino</label></div>
+			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="F" />Feminino</label></div><br /><br/>
 			    
 			    
-			    <label class="control-label requerido">Tempo de Experi&ecirc;ncia Profissional</label> <input class="form-control" type="text" ng-model="jogador.experiencia" /><br />
+			    <label class="control-label requerido">Tempo de Experi&ecirc;ncia Profissional</label> <input class="form-control" type="text" ng-model="experiencia" /><br />
 			    <label class="requerido">Forma&ccedil;&atilde;o Acad&ecirc;mica:</label>
 					 <select class="form-control" ng-model="formacaoAcademica"
                      ng-options="formacao.nome for formacao in formacoes track by formacao.id"/>
@@ -34,7 +41,7 @@
                      ng-options="atuacao.nome for atuacao in atuacoes track by atuacao.id"/><br/><br/>
                      <div class="form-inline">
 			    	
-			    	<input class="btn btn-primary" type="button" ng-click="update(novoExperimento)" value="Salvar" />
+			    	<input class="btn btn-primary" type="button" ng-click="salvarDadosPessoais()" value="Salvar" />
 			    </div><br/>
 			   </div> 
 			   

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.trustgame.model.BookKepping;
 import br.com.trustgame.model.DadosPessoais;
 import br.com.trustgame.repository.DadosPessoaisRepository;
 
@@ -17,13 +18,9 @@ public class DadosPessoaisService {
 
 	public List<DadosPessoais> getAll() {
 		return dadosPessoaisRepository.findAll();
-	}
-
-public void mergeSetor(DadosPessoais setoresContato){ 
-	    dadosPessoaisRepository.save(setoresContato);
-	}
-
-	public void deleteAll(List<DadosPessoais> listSetoresContato) {
-		dadosPessoaisRepository.delete(listSetoresContato);
+	}	
+	
+	public void cadastroJogador(DadosPessoais dadosPessoais){ 
+		dadosPessoaisRepository.save(dadosPessoais);
 	}	
 }
