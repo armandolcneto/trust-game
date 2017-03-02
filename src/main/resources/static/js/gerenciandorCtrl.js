@@ -12,6 +12,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.valorEnviadoA ="";
 	$scope.valorRecebidoA ="";
 	
+	
 	//$scope.perfil = perfil;
 	
 	function showBookKeeping(){
