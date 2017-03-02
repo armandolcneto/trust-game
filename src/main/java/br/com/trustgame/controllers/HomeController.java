@@ -73,15 +73,21 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping("/jogador")
-	public ModelAndView jogador() {
+	@RequestMapping(value = "/jogador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	public ModelAndView jogador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/jogador");
+		mav.addObject("perfilJogador", perfilJogador);
+		mav.addObject("jogoId", jogoId);
+		mav.addObject("tipoJogador", tipoJogador);
 		return mav;
 	}
 	
-	@RequestMapping("/gerenciador")
-	public ModelAndView gerenciador() {
+	@RequestMapping(value = "/gerenciador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	public ModelAndView gerenciador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/gerenciador");
+		mav.addObject("perfilJogador", perfilJogador);
+		mav.addObject("jogoId", jogoId);
+		mav.addObject("tipoJogador", tipoJogador);
 		return mav;
 	}
 	
