@@ -20,6 +20,7 @@ public class ConfigJogoService {
 	}	
 
 	public void criarJogo(ConfigJogo data) {
-		configJogoRepository.save(data);
+		ConfigJogo jogo = configJogoRepository.save(data);
+		System.out.println(jogo.toString());
 	}
 }
