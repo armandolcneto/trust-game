@@ -16,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.trustgame.model.AtuacaoProfissional;
 import br.com.trustgame.model.BookKepping;
 import br.com.trustgame.model.ConfigJogo;
+import br.com.trustgame.model.DadosPessoais;
 import br.com.trustgame.model.FormacaoAcademica;
 import br.com.trustgame.model.PerfilJogador;
 import br.com.trustgame.model.TransferenciaJogo;
 import br.com.trustgame.service.AtuacaoProfissionalService;
 import br.com.trustgame.service.BookKeppingService;
 import br.com.trustgame.service.ConfigJogoService;
+import br.com.trustgame.service.DadosPessoaisService;
 import br.com.trustgame.service.FormacaoAcademicaService;
 import br.com.trustgame.service.PerfilJogadorService;
 import br.com.trustgame.service.TransferenciaJogoService;
@@ -47,6 +49,10 @@ public class HomeController {
 	
 	@Autowired
 	private BookKeppingService bookKeppingService;
+
+	@Autowired
+	private DadosPessoaisService dadosPessoaisService;
+	
 	
 	private ModelAndView mav;
 	
@@ -67,15 +73,21 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping("/jogador")
-	public ModelAndView jogador() {
+	@RequestMapping(value = "/jogador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	public ModelAndView jogador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/jogador");
+		mav.addObject("perfilJogador", perfilJogador);
+		mav.addObject("jogoId", jogoId);
+		mav.addObject("tipoJogador", tipoJogador);
 		return mav;
 	}
 	
-	@RequestMapping("/gerenciador")
-	public ModelAndView gerenciador() {
+	@RequestMapping(value = "/gerenciador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	public ModelAndView gerenciador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/gerenciador");
+		mav.addObject("perfilJogador", perfilJogador);
+		mav.addObject("jogoId", jogoId);
+		mav.addObject("tipoJogador", tipoJogador);
 		return mav;
 	}
 	
@@ -131,7 +143,15 @@ public class HomeController {
 	@ResponseBody
 	public HttpStatus criarPerfil(@RequestBody PerfilJogador data){
 		perfilJogadorService.criarPerfil (data);
+
 		
+		return HttpStatus.OK;
+	}
+	
+	@RequestMapping(value = "/cadastroJogador", method = { RequestMethod.POST})
+	@ResponseBody
+	public HttpStatus cadastroJogador(@RequestBody DadosPessoais data){
+		dadosPessoaisService.cadastroJogador(data);
 		return HttpStatus.OK;
 	}
 	
