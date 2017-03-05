@@ -16,6 +16,21 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 	$scope.valorEnviadoB ="";
 	$scope.valorRecebidoB =""; 
 	
+	var myParam = queryObj();
+	
+	function queryObj() {
+	    var result = {}, keyValuePairs = location.href.slice(1).split("&");
+	    keyValuePairs.forEach(function(keyValuePair) {
+	        keyValuePair = keyValuePair.split('=');
+	        result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
+	    });
+	    return result;
+	}
+	
+	$scope.idJogo = parseInt(myParam.jogo);
+	$scope.idPerfil = parseInt(myParam.perfil);
+	$scope.tipoJogador =myParam.tipo;
+	
 	$scope.update = function(experimento) {
 
 	};
@@ -105,11 +120,11 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			}
 			
 			//saldo acumulado de A
-			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+			var jogo = {id : $scope.idJogo, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
-				id : 5,
+				id : $scope.idPerfil,
 				conifgJofo : jogo,
-				tipoPerfil : 'ADM',
+				tipoPerfil : $scope.tipoJogador,
 				saldoAcumulado : $scope.saldoAcumuladoA		
 			};
 	
@@ -145,11 +160,11 @@ angular.module("trustGameApp").controller("jogadorCtrl", function($scope, $http,
 			$scope.saldoRodadaA += parseFloat(obj.valor);
 			$scope.saldotransferenciaA += parseFloat(obj.valor);
 			$scope.msgsaldoRodada2 = "Saldo do "+$scope.round+"º Round: ";
-			var jogo = {id : 1, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+			var jogo = {id : $scope.idJogo, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
-				id : 5,
+				id : $scope.idPerfil,
 				conifgJofo : jogo,
-				tipoPerfil : 'ADM',
+				tipoPerfil : $scope.tipoJogador,
 				saldoAcumulado : $scope.saldoAcumuladoA		
 			};
 

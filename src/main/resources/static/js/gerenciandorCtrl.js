@@ -12,6 +12,20 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.valorEnviadoA ="";
 	$scope.valorRecebidoA ="";
 	
+    var myParam = queryObj();
+	
+	function queryObj() {
+	    var result = {}, keyValuePairs = location.href.slice(1).split("&");
+	    keyValuePairs.forEach(function(keyValuePair) {
+	        keyValuePair = keyValuePair.split('=');
+	        result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
+	    });
+	    return result;
+	}
+	
+	$scope.idJogo = parseInt(myParam.jogo);
+	$scope.idPerfil = parseInt(myParam.perfil);
+	$scope.tipoJogador =myParam.tipo;
 	
 	//$scope.perfil = perfil;
 	
@@ -106,11 +120,11 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		//$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
 		$scope.valorEnviadoA = "Valor Enviado para o Jogador A: R$ "+$("#valorEnviadoB").val()+",00";
 		//Saldo Acumulado de B
-		var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+		var jogo = {id : $scope.idJogo, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 		var dataObj2 = {
-			id : 6,
+			id : $scope.idPerfil,
 			conifgJofo : jogo,
-			tipoPerfil : 'INV',
+			tipoPerfil : $scope.tipoJogador,
 			saldoAcumulado : $scope.saldoAcumuladoB
 		};
 		
@@ -163,11 +177,11 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			//$scope.Rodadas = "Rounds";
 			$scope.msgsaldoRodada = "";
 			//Saldo do {{round}}&ordm; Round: R$ {{saldoRodadaB}},00
-			var jogo = {id : 1, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+			var jogo = {id : $scope.idJogo, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 			var dataObj2 = {
-				id : 6,
+				id : $scope.idPerfil,
 				conifgJofo : jogo,
-				tipoPerfil : 'INV',
+				tipoPerfil : $scope.tipoJogador,
 				saldoAcumulado : $scope.saldoAcumuladoB
 			};
 			

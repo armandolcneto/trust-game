@@ -39,9 +39,9 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		$http({url : 'http://' + window.location.host + '/cadastroJogador', method : "POST", data : dataObj2}).
 		success(function(data, status, headers, config) {
 			if ($scope.tipoJogador == 'ADM'){
-				window.location.href = 'http://' + window.location.host + '/jogador/'+$scope.perfilJogador+'/'+$scope.jogoId+'/'+$scope.tipoJogador;
+				window.location.href = 'http://' + window.location.host + '/jogador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;
 			}else{
-				window.location.href = 'http://' + window.location.host + '/gerenciador/'+$scope.perfilJogador+'/'+$scope.jogoId+'/'+$scope.tipoJogador;
+				window.location.href = 'http://' + window.location.host + '/gerenciador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;
 			}
 		}).
 		error(function(data, status, headers, config) {

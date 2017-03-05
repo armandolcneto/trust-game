@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,7 +75,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/jogador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	@RequestMapping(value = "/jogador&{perfilJogador}&{jogoId}&{tipoJogador}")
 	public ModelAndView jogador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/jogador");
 		mav.addObject("perfilJogador", perfilJogador);
@@ -82,7 +84,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/gerenciador/{perfilJogador}/{jogoId}/{tipoJogador}")
+	@RequestMapping(value = "/gerenciador&{perfilJogador}&{jogoId}&{tipoJogador")
 	public ModelAndView gerenciador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/gerenciador");
 		mav.addObject("perfilJogador", perfilJogador);
