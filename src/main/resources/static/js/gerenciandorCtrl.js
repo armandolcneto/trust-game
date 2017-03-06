@@ -108,8 +108,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.sendNameB = function() {
 		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
 			'valorEnviado' : $("#valorEnviadoB").val(),
-			'id_perfil': 6,
-			'nome' : "Armando Neto",
+			'id_perfil': $scope.idPerfil,
+			'nome' : "Jogador B",
 			'grupo': "B",
 			'destino' : "http://"+window.location.host+"/gerenciador.html/id=5",
 			'book' : $("#bookKepping").val()
@@ -195,7 +195,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		
 			// trânferencia do valor que A enviou
 			var perfilA = {
-					id : 5,
+					id : obj.id_perfil,
 					conifgJofo : jogo,
 					tipoPerfil : 'ADM',
 					saldoAcumulado : $scope.saldoAcumuladoB
@@ -206,7 +206,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 				envioJogador : parseFloat(obj.valor),
 				tempo : 1,
 				roundJogo : $scope.round,
-				tipoJogador : 'A',
+				tipoJogador : obj.grupo,
 				conifgJofo : jogo,
 				saldoAcumulado : $scope.saldoAcumuladoB
 
@@ -225,7 +225,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			
 				// Book Kepping do jogador A
 				 var perfilB = {
-						id : 5,
+						id : obj.id_perfil,
 						conifgJofo : jogo,
 						tipoPerfil : 'ADM',
 						saldoAcumulado : $scope.saldoAcumuladoB

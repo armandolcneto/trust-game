@@ -84,7 +84,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/gerenciador&{perfilJogador}&{jogoId}&{tipoJogador")
+	@RequestMapping(value = "/gerenciador&{perfilJogador}&{jogoId}&{tipoJogador}")
 	public ModelAndView gerenciador(Object perfilJogador,Object jogoId,Object tipoJogador) {
 		mav = new ModelAndView("pages/gerenciador");
 		mav.addObject("perfilJogador", perfilJogador);
