@@ -12,7 +12,15 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		$http.get('http://'+window.location.host+'/todasAtuacaoProfissional').success( function(response) {
 			$scope.atuacoes = response;
 		});
+		
+		$http.get('http://'+window.location.host+'/todosPerfis').success( function(response) {
+			$scope.perfis = response;
+		});
 	}
+	
+	console.log($scope.perfis);
+	console.log($scope.atuacoes);
+	console.log($scope.formacoes);
 	
 	//Salvar Dados Pessoais
 	$scope.salvarDadosPessoais = function () { 

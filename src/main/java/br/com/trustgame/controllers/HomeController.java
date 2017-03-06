@@ -95,9 +95,14 @@ public class HomeController {
 	
 	@RequestMapping(value = "/todasFormacaoAcademica", method = { RequestMethod.GET })
 	@ResponseBody
-	
 	public List<FormacaoAcademica> getAll(){
 		return formacaoAcademicaService.getAll();
+	}
+	
+	@RequestMapping(value = "/todosPerfis", method = { RequestMethod.GET })
+	@ResponseBody
+	public List<PerfilJogador> getAllPerfil(){
+		return perfilJogadorService.getAll();
 	}
 	
 	@RequestMapping(value = "/todasAtuacaoProfissional", method = { RequestMethod.GET })
