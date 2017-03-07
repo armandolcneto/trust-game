@@ -19,8 +19,8 @@ public class ConfigJogoService {
 		return configJogoRepository.findAll();
 	}	
 
-	public void criarJogo(ConfigJogo data) {
-		ConfigJogo jogo = configJogoRepository.save(data);
-		System.out.println(jogo.toString());
+	public ConfigJogo criarJogo(ConfigJogo data) {
+		return configJogoRepository.save(data);
+		
 	}
 }

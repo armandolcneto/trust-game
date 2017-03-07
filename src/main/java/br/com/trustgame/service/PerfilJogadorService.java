@@ -28,7 +28,6 @@ public class PerfilJogadorService {
 	}
 
 	public PerfilJogador criarPerfil( PerfilJogador novo) {
-		
 		return perfilJogadorRepository.save(novo);
 	}
 }

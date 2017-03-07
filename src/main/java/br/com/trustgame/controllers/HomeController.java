@@ -140,19 +140,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/novoexperimento", method = { RequestMethod.POST})
 	@ResponseBody
-	public HttpStatus novoexperimento(@RequestBody ConfigJogo data){
-		configJogoService.criarJogo(data);
-		return HttpStatus.OK;
+	public ConfigJogo novoexperimento(@RequestBody ConfigJogo data){
+		return configJogoService.criarJogo(data);
 	}
 	
 	
 	@RequestMapping(value = "/criarUsuario", method = { RequestMethod.POST})
 	@ResponseBody
-	public HttpStatus criarPerfil(@RequestBody PerfilJogador data){
-		perfilJogadorService.criarPerfil (data);
-
-		
-		return HttpStatus.OK;
+	public PerfilJogador criarPerfil(@RequestBody PerfilJogador data){
+		return perfilJogadorService.criarPerfil (data);
 	}
 	
 	@RequestMapping(value = "/cadastroJogador", method = { RequestMethod.POST})

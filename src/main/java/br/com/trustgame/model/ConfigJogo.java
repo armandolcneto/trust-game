@@ -86,5 +86,12 @@ public class ConfigJogo implements Serializable{
 	public void setConversaoMoeda(float conversaoMoeda) {
 		this.conversaoMoeda = conversaoMoeda;
 	}
-	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}	
 }

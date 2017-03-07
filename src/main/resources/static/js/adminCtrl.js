@@ -30,46 +30,63 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 	}
 	
 	function criarUsuario(tipo){
-		if(!$scope.novoExperimento.id){
-			$scope.criarExperimento();
+		if(!$scope.novoExperimento.id || $scope.novoExperimento.id < 0){
+			$scope.novoexperimento();
 		}
 		
 		if(tipo == "investidor"){
 			tipo = "INV"
+				var dataObj2 = {
+					id : null,
+					conifgJofo : $scope.novoExperimento,
+					tipoPerfil : tipo,
+					saldoAcumulado : 0.00,
+					comBookKeeping : $scope.jogador2.comBookKeeping};
 		}else{
 			tipo = "ADM"
+				var dataObj2 = {
+					id : null,
+					conifgJofo : $scope.novoExperimento,
+					tipoPerfil : tipo,
+					saldoAcumulado : 0.00,
+					comBookKeeping : $scope.jogador1.comBookKeeping};
 		}
 		
-		$scope.novoJogador.id = null;
-		$scope.novoJogador.configJogo = $scope.novoExperimento;
-		$scope.novoJogador.tipo = tipo;
-		$scope.novoJogador.saldoAcumulado = 0;
+		
 	
 
-		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : $scope.novoJogador}). 
-		success(function(data, status, headers, config) {
-			console.log("deu certo");
+		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : dataObj2}). 
+		success(function(result) {
+			if(result.conifgJofo.tipoPerfil == "ADM"){
+				$scope.jogador1 = result;
+			}else{
+				$scope.jogador2 = result;
+			}
+				
 		}).
-		error(function(data, status, headers, config) {
+		error(function(result) {
 			console.log("não deu :-(");
 		});
 		
 	}
 	
-	$scope.criarExperimento = function() {
+	$scope.novoexperimento = function() {
 	
-		$scope.novoExperimento.id = null;
-		$scope.novoExperimento.tipoJogo = "S";
-		$scope.novoExperimento.montante = 10;
-		$scope.novoExperimento.qtdpessoas = 2;
-		$scope.novoExperimento.multiplicador = 3;
-		$scope.novoExperimento.conversaoMoeda = 0.45;
+		var jogo = {id : null, 
+				tipoJogo : 'S',
+				nome : $scope.novoExperimento.nome,
+				montante : 10.00, 
+				qtdpessoas : 1, 
+				mutiplicador : 3, 
+				conversaoMoeda : 0.45};
+		
 			
 		
-		$http({url : 'http://' + window.location.host + '/criarExperimento', method : "POST", data : $scope.novoExperimento}). 
-			then(function(data, status, headers, config) {
-				console.log(data);
-				console.log("ACERTOOOOO MISERAVEL");
+		$http({url : 'http://' + window.location.host + '/novoexperimento', method : "POST", data : jogo}). 
+			then(function(result) {
+				$scope.novoExperimento = result.data;
+				$scope.novoExperimento.tipo
+				console.log(result.data);
 				//$scope.novoExperimento = data;
 			}),(function(data, status, headers, config) {
 				console.log("não deu experimento");
