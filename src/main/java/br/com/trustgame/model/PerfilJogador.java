@@ -35,7 +35,7 @@ public class PerfilJogador implements Serializable{
 	private float saldoAcumulado;
 	
 	@Column(name = "book", nullable = false)
-	private float comBookKeeping;
+	private boolean comBookKeeping;
 	
 	public int getId() {
 		return id;
@@ -69,11 +69,8 @@ public class PerfilJogador implements Serializable{
 		this.saldoAcumulado = saldoAcumulado;
 	}
 
-	public float getComBookKeeping() {
-		return comBookKeeping;
-	}
 
-	public void setComBookKeeping(float comBookKeeping) {
+	public void setComBookKeeping(boolean comBookKeeping) {
 		this.comBookKeeping = comBookKeeping;
 	}
 }
