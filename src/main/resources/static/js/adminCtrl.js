@@ -36,20 +36,21 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 		
 		if(tipo == "investidor"){
 			tipo = "INV"
-				var dataObj2 = {
-					id : null,
-					conifgJofo : $scope.novoExperimento,
-					tipoPerfil : tipo,
-					saldoAcumulado : 0.00,
-					comBookKeeping : $scope.jogador2.comBookKeeping};
+			var dataObj2 = {
+				id : null,
+				conifgJofo : $scope.novoExperimento,
+				tipoPerfil : tipo,
+				saldoAcumulado : 0.00,
+				comBookKeeping : $scope.jogador1.comBookKeeping};
 		}else{
 			tipo = "ADM"
-				var dataObj2 = {
-					id : null,
-					conifgJofo : $scope.novoExperimento,
-					tipoPerfil : tipo,
-					saldoAcumulado : 0.00,
-					comBookKeeping : $scope.jogador1.comBookKeeping};
+			var dataObj2 = {
+				id : null,
+				conifgJofo : $scope.novoExperimento,
+				tipoPerfil : tipo,
+				saldoAcumulado : 0.00,
+				comBookKeeping : $scope.jogador2.comBookKeeping};
+			
 		}
 		
 		
@@ -57,7 +58,7 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 
 		$http({url : 'http://' + window.location.host + '/criarUsuario', method : "POST", data : dataObj2}). 
 		success(function(result) {
-			if(result.conifgJofo.tipoPerfil == "ADM"){
+			if(result.tipoPerfil == "INV"){
 				$scope.jogador1 = result;
 			}else{
 				$scope.jogador2 = result;

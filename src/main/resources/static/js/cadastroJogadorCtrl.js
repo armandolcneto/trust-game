@@ -46,7 +46,7 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		
 		$http({url : 'http://' + window.location.host + '/cadastroJogador', method : "POST", data : dataObj2}).
 		success(function(data, status, headers, config) {
-			if ($scope.tipoJogador == 'ADM'){
+			if ($scope.tipoJogador == 'INV'){
 				window.location.href = 'http://' + window.location.host + '/jogador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;
 			}else{
 				window.location.href = 'http://' + window.location.host + '/gerenciador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;

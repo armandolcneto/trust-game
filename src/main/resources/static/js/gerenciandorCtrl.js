@@ -197,7 +197,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			var perfilA = {
 					id : obj.id_perfil,
 					conifgJofo : jogo,
-					tipoPerfil : 'ADM',
+					tipoPerfil : 'INV',
 					saldoAcumulado : $scope.saldoAcumuladoB
 				};
 			var dataObj = {
@@ -227,7 +227,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 				 var perfilB = {
 						id : obj.id_perfil,
 						conifgJofo : jogo,
-						tipoPerfil : 'ADM',
+						tipoPerfil : 'INV',
 						saldoAcumulado : $scope.saldoAcumuladoB
 					};
 				var dataObj3 = {
