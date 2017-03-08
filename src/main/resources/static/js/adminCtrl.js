@@ -86,7 +86,6 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 		$http({url : 'http://' + window.location.host + '/novoexperimento', method : "POST", data : jogo}). 
 			then(function(result) {
 				$scope.novoExperimento = result.data;
-				$scope.novoExperimento.tipo
 				console.log(result.data);
 				//$scope.novoExperimento = data;
 			}),(function(data, status, headers, config) {
