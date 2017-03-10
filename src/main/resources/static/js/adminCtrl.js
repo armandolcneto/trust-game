@@ -13,6 +13,16 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 	$scope.jogador2.id = 0;
 	$scope.criarUsuario = criarUsuario;
 	
+	$scope.resetForm = function ()
+    {
+		$scope.novoExperimento.nome = "";
+		$scope.jogador1.id = 0;
+		$scope.jogador1.comBookKeeping = false;
+		$scope.jogador2.id = 0;
+		$scope.jogador2.comBookKeeping = false;
+		
+	}
+	
 	function carregarPagina() {
 		$http.get('http://'+window.location.host+'/buscarExperimentos').success( function(response) {
 			$scope.experimentos = response;

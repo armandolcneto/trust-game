@@ -9,9 +9,9 @@
 			<p th:if="${param.error}" class="alert alert-error">Ocorreu algum erro, tente novamente.</p>	
     		<div class="pageTitle col-md-12">
     	 		<h2>Administra&ccedil;&atilde;o</h2>
-    		</div>  	
+    		</div>
+    		<div class="row">  	
 		  	<div class="center-block">
-		    	
 		    	<input class="btn btn-default center-block" type="button" ng-click="novo=true" ng-show="!novo" value="Novo Experimento"/>
 		  	</div>
 	    	<div class="col-md-6"  ng-show="novo">
@@ -39,22 +39,33 @@
 			    
 			    
 			    <div class="form-inline" style="margin-top: 25px;">
-			    	<input class="btn btn-default btn-primary" type="button" ng-disabled="jogador1 != null; jogador2 != null" ng-click="novoexperimento()" value="Criar" />
-			    	<input class="btn btn-default" type="button" ng-click="novo=false"  value="Cancelar"/>
+			    	<input class="btn btn-default btn-primary" type="button" ng-disabled="jogador1 == null; jogador2 == null" ng-click="novo=false;resetForm();" value="Concluir" />
+			    	<input class="btn btn-default" type="button" ng-click="novo=false;resetForm();"  value="Cancelar"/>
 			    </div>
-			  </form>
+			    </form>
+			    </div>
+			  
 			</div>
 			
-			<div class="col-md-6"  ng-show="novoExperimento.tipo">
-				
-			</div>
-	    	<table> <!--  ng-show="experimentos.length"-->
-				<tr ng-repeat="experimento in experimentos">
-					<td ng-hide="true">{{ experimento.id }}</td>
-					<td>{{ experimento.tipo }}</td>
+			<div class="row">
+	    	<table class="table" style="border: 1px solid #ccc; margin-top:20px;" ng-show="experimentos.length">
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Tipo</th>
+					<th>Status</th>
+					<th>A&ccedil;&otilde;es</th>
 					
 				</tr>
+				<tr ng-repeat="experimento in experimentos">
+					<td>{{ experimento.id }}</td>
+					<td>{{ experimento.nome }}</td>
+					<td>{{ experimento.tipo }}</td>
+					<td>{{experimento.status}}</td>
+					<td></td>
+				</tr>
 			</table>
+			</div>
 	  	</div>
 	</div>
 
