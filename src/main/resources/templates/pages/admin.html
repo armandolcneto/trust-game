@@ -50,19 +50,19 @@
 			<div class="row">
 	    	<table class="table" style="border: 1px solid #ccc; margin-top:20px;" ng-show="experimentos.length">
 				<tr>
-					<th>ID</th>
+					<th>ID do jogo</th>
 					<th>Nome</th>
 					<th>Tipo</th>
-					<th>Jogador A</th>
-					<th>Jogador B</th>
+					<th>Jogador</th>
+					<th>Tipo Jogador</th>
 					
 				</tr>
-				<tr ng-repeat="experimento in experimentos">
-					<td>{{ experimento.id }}</td>
-					<td>{{ experimento.nome }}</td>
-					<td>{{ experimento.tipoJogo }}</td>
-					<td>{{  }}</td>
-					<td>{{  }}</td>
+				<tr ng-repeat="jogo in jogosCadastrados">
+					<td>{{ jogo.id }}</td>
+					<td>{{ jogo.nome }}</td>
+					<td>{{ jogo.tipoJogo }}</td>
+					<td>{{ jogo.perfil }}</td>
+					<td>{{ jogo.tipoPerfil }}</td>
 				</tr>
 			</table>
 			</div>

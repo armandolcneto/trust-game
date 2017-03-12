@@ -19,7 +19,6 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		
 		$http.get('http://'+window.location.host+'/todosPerfis').success( function(todosPerfis) {
 			$scope.perfis = todosPerfis;
-			console.log($scope.perfis);
 		});
 		
 		$http.get('http://'+window.location.host+'/dadosJogador').success( function(dadosJogador) {

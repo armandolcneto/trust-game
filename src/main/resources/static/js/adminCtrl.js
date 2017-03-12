@@ -12,6 +12,9 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 	$scope.jogador1.id = 0;
 	$scope.jogador2.id = 0;
 	$scope.criarUsuario = criarUsuario;
+	$scope.perfis = {};
+	$scope.experimentos = {};
+	$scope.jogosCadastrados = [];
 	
 	$scope.resetForm = function ()
     {
@@ -24,9 +27,25 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 	}
 	
 	function carregarPagina() {
-		$http.get('http://'+window.location.host+'/buscarExperimentos').success( function(response) {
-			$scope.experimentos = response;
-			console.log($scope.experimentos);
+		$http.get('http://'+window.location.host+'/buscarExperimentos').success( function(todosJogos) {
+			$scope.experimentos = todosJogos;
+			$http.get('http://'+window.location.host+'/todosPerfis').success( function(todosPerfis) {
+				$scope.perfis = todosPerfis;
+				angular.forEach($scope.experimentos, function(jogo) {
+					angular.forEach($scope.perfis, function(perfil) {
+						if(jogo.id == perfil.conifgJofo.id){
+							var jogos = {
+									id : jogo.id,
+									nome: jogo.nome,
+									tipoJogo: jogo.tipoJogo,
+									perfil : perfil.id,
+									tipoPerfil : perfil.tipoPerfil
+									};
+							$scope.jogosCadastrados.push(jogos);
+						}
+					});
+				});	
+			});
 		});
 	}
 	
