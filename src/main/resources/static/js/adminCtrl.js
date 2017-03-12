@@ -26,6 +26,7 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 	function carregarPagina() {
 		$http.get('http://'+window.location.host+'/buscarExperimentos').success( function(response) {
 			$scope.experimentos = response;
+			console.log($scope.experimentos);
 		});
 	}
 	
