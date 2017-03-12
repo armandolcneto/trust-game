@@ -1,7 +1,9 @@
 angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,$http,$location){
 	
 	$scope.tipoDoJogo = true;
+	$scope.entrou = false
 	$scope.ativado = "ativado";
+	$scope.perfis = {};
 	carregarPagina();
 	
 	function carregarPagina() {
@@ -13,18 +15,22 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 			$scope.atuacoes = response;
 		});
 		
-		$http.get('http://'+window.location.host+'/todosPerfis').success( function(response) {
-			$scope.perfis = response;
+		$http.get('http://'+window.location.host+'/todosPerfis').success( function(todosPerfis) {
+			$scope.perfis = todosPerfis;
 		});
 	}
-	
-	console.log($scope.perfis);
-	console.log($scope.atuacoes);
-	console.log($scope.formacoes);
 	
 	//Salvar Dados Pessoais
 	$scope.salvarDadosPessoais = function () { 
 		
+		angular.forEach($scope.perfis, function(perfil) {
+			if(perfil.id == $scope.perfilJogador){
+				$scope.jogoId = perfil.conifgJofo.id
+				$scope.tipoJogador = perfil.tipoPerfil
+				$scope.entrou = true
+			}
+		});
+
 		var jogo = {id : $scope.jogoId, tipoJogo: 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
 		var perfil = {
 				id : $scope.perfilJogador,
@@ -53,7 +59,11 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 			}
 		}).
 		error(function(data, status, headers, config) {
-			console.log("não deu :-(");
+		    if ($scope.entrou == false){
+		    	alert('Perfil não encontrado');
+		    }else{
+		    	alert('Preencha todos os campos para prosseguir para o jogo!');
+		    }
 		});
 	}	
 

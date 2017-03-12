@@ -18,27 +18,21 @@
 			  <form name="form" th:action="@{/cadastroJogador}" action="/login" method="POST">
 			  <div class="form-group col-md-6">
                 
-                <label class="control-label requerido">Informe seu ID</label> <input class="form-control" type="number" ng-model="perfilJogador" /><br />
-                <label class="control-label requerido">Informe o ID do jogo</label> <input class="form-control" type="number" ng-model="jogoId" /><br />
-                <label class="control-label requerido">Informe o tipo de jogador</label>
-                <select class="form-control" ng-model="tipoJogador">
-                  <option value="INV">Investidor</option>
-				  <option value="ADM">Administrador</option>
-				</select>
-			    <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="nome" /><br />
-			    <label class="control-label requerido">Data de Nascimento</label> <input class="form-control" type="date" ng-model="dataNascimento" /><br />
-			    Sexo: 
-			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="M" />Masculino</label></div>
-			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="F" />Feminino</label></div><br /><br/>
+                <label class="control-label requerido">Informe seu ID</label> <input class="form-control" type="number" ng-model="perfilJogador" required="required"/><br />
+			    <label class="control-label requerido">Nome</label> <input class="form-control" type="text" ng-model="nome" required="required"/><br />
+			    <label class="control-label requerido">Data de Nascimento</label> <input class="form-control" type="date" ng-model="dataNascimento" required="required"/><br />
+			    <label class="control-label requerido">Sexo</label>
+			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="M" required="required"/>Masculino</label></div>
+			    <div class="radio-inline"><label><input name="sexo" type="radio" ng-model="sexo" value="F" required="required"/>Feminino</label></div><br /><br/>
 			    
 			    
-			    <label class="control-label requerido">Tempo de Experi&ecirc;ncia Profissional</label> <input class="form-control" type="number" ng-model="experiencia" /><br />
+			    <label class="control-label requerido">Tempo de Experi&ecirc;ncia Profissional</label> <input class="form-control" type="number" ng-model="experiencia" required="required"/><br />
 			    <label class="requerido">Forma&ccedil;&atilde;o Acad&ecirc;mica:</label>
 					 <select class="form-control" ng-model="formacaoAcademica"
-                     ng-options="formacao.nome for formacao in formacoes track by formacao.id"/>
+                     ng-options="formacao.nome for formacao in formacoes track by formacao.id" required="required"/>
                 <label class="requerido">Atua&ccedil;&atilde;o Profissional:</label>
 					 <select class="form-control" ng-model="atuacaoProfissional"
-                     ng-options="atuacao.nome for atuacao in atuacoes track by atuacao.id"/><br/><br/>
+                     ng-options="atuacao.nome for atuacao in atuacoes track by atuacao.id" required="required"/><br/><br/>
                      <div class="form-inline">
 			    	
 			    	<input class="btn btn-primary" type="button" ng-click="salvarDadosPessoais()" value="Salvar" />
