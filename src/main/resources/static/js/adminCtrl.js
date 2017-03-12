@@ -20,7 +20,7 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 		$scope.jogador1.comBookKeeping = false;
 		$scope.jogador2.id = 0;
 		$scope.jogador2.comBookKeeping = false;
-		
+		window.location.href = 'http://' + window.location.host + '/admin'
 	}
 	
 	function carregarPagina() {

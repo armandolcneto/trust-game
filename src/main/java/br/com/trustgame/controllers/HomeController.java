@@ -99,6 +99,12 @@ public class HomeController {
 		return formacaoAcademicaService.getAll();
 	}
 	
+	@RequestMapping(value = "/dadosJogador", method = { RequestMethod.GET })
+	@ResponseBody
+	public List<DadosPessoais> getAllDados(){
+		return dadosPessoaisService.getAll();
+	}
+	
 	@RequestMapping(value = "/todosPerfis", method = { RequestMethod.GET })
 	@ResponseBody
 	public List<PerfilJogador> getAllPerfil(){
