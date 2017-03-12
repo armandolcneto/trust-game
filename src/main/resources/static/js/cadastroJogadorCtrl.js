@@ -1,10 +1,11 @@
 angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,$http,$location){
 	
 	$scope.tipoDoJogo = true;
-	$scope.entrou = false
-	$scope.entrouDados = false
+	$scope.entrou = false;
+	$scope.entrouDados = false;
 	$scope.ativado = "ativado";
 	$scope.perfis = {};
+	$scope.dados = {};
 	carregarPagina();
 	
 	function carregarPagina() {
@@ -18,11 +19,11 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		
 		$http.get('http://'+window.location.host+'/todosPerfis').success( function(todosPerfis) {
 			$scope.perfis = todosPerfis;
+			console.log($scope.perfis);
 		});
 		
 		$http.get('http://'+window.location.host+'/dadosJogador').success( function(dadosJogador) {
 			$scope.dados = dadosJogador;
-			console.log($scope.dados);
 		});
 	}
 	
@@ -31,7 +32,7 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 		
 		angular.forEach($scope.dados, function(dados) {
 			if(dados.perfilJogador.id == $scope.perfilJogador){
-				$scope.entrouDados = true
+				$scope.entrouDados = true;
 			}
 		});
 		
@@ -39,9 +40,10 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 			
 			angular.forEach($scope.perfis, function(perfil) {
 				if(perfil.id == $scope.perfilJogador){
-					$scope.jogoId = perfil.conifgJofo.id
-					$scope.tipoJogador = perfil.tipoPerfil
-					$scope.entrou = true
+					$scope.jogoId = perfil.conifgJofo.id;
+					$scope.tipoJogador = perfil.tipoPerfil;
+					$scope.cmbBook = perfil.comBookKeeping;
+					$scope.entrou = true;
 				}
 			});
 	
@@ -67,9 +69,9 @@ angular.module("trustGameApp").controller("cadastroJogadorCtrl",function($scope,
 			$http({url : 'http://' + window.location.host + '/cadastroJogador', method : "POST", data : dataObj2}).
 			success(function(data, status, headers, config) {
 				if ($scope.tipoJogador == 'INV'){
-					window.location.href = 'http://' + window.location.host + '/jogador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;
+					window.location.href = 'http://' + window.location.host + '/jogador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador+'&book='+$scope.cmbBook;
 				}else{
-					window.location.href = 'http://' + window.location.host + '/gerenciador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador;
+					window.location.href = 'http://' + window.location.host + '/gerenciador&'+'perfil='+$scope.perfilJogador+'&jogo='+$scope.jogoId+'&tipo='+$scope.tipoJogador+'&book='+$scope.cmbBook;
 				}
 			}).
 			error(function(data, status, headers, config) {

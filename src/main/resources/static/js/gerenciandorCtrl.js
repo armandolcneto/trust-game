@@ -11,6 +11,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.proxima = false;
 	$scope.valorEnviadoA ="";
 	$scope.valorRecebidoA ="";
+	$scope.msgBook = false;
 	
     var myParam = queryObj();
 	
@@ -26,6 +27,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	$scope.idJogo = parseInt(myParam.jogo);
 	$scope.idPerfil = parseInt(myParam.perfil);
 	$scope.tipoJogador =myParam.tipo;
+	$scope.cmbBook =myParam.book;
 	
 	//$scope.perfil = perfil;
 	
@@ -141,6 +143,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 		}else{
 			$scope.desabilitaBotao = true;
 			$scope.msgsaldoRodada = "Fim do Jogo!";
+			$scope.valorRecebidoA = "Saldo do Jogador B: R$"+$scope.saldoAcumuladoB+",00";
+			$scope.valorEnviadoA = "";
 		}
 		
 		$scope.optionsJogador2 = [];
@@ -221,30 +225,37 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			});
 			
 			if ($scope.round > 10){
-				$scope.Rodadas = true;
-			
-				// Book Kepping do jogador A
-				 var perfilB = {
-						id : obj.id_perfil,
-						conifgJofo : jogo,
-						tipoPerfil : 'INV',
-						saldoAcumulado : $scope.saldoAcumuladoB
+				if ($scope.cmbBook == 'true'){
+					if($scope.round == 11){
+						$scope.msgBook = true;
+					}else{
+						$scope.msgBook = false;
+					}
+					$scope.Rodadas = true;
+				
+					// Book Kepping do jogador A
+					 var perfilB = {
+							id : obj.id_perfil,
+							conifgJofo : jogo,
+							tipoPerfil : 'INV',
+							saldoAcumulado : $scope.saldoAcumuladoB
+						};
+					var dataObj3 = {
+						id : null,
+						perfilJogador : perfilA,
+						book : obj.book,
+						roundJogo : $scope.round,
+						conifgJofo : jogo
 					};
-				var dataObj3 = {
-					id : null,
-					perfilJogador : perfilA,
-					book : obj.book,
-					roundJogo : $scope.round,
-					conifgJofo : jogo
-				};
-						
-				 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
-				 success(function(data, status, headers, config) {
-					 console.log("deu certo");
-				 }).
-				 error(function(data, status, headers, config) {
-					 console.log("não deu :-(");
-				 });
+							
+					 $http({url: 'http://'+window.location.host+'/bookKepping', method:"POST", data: dataObj3}).
+					 success(function(data, status, headers, config) {
+						 console.log("deu certo");
+					 }).
+					 error(function(data, status, headers, config) {
+						 console.log("não deu :-(");
+					 });
+				}	 
 			}	 
 			 
 			 $scope.fimround = "";

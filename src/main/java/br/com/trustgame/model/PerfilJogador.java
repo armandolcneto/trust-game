@@ -69,8 +69,12 @@ public class PerfilJogador implements Serializable{
 		this.saldoAcumulado = saldoAcumulado;
 	}
 
+	public boolean isComBookKeeping() {
+		return comBookKeeping;
+	}
 
 	public void setComBookKeeping(boolean comBookKeeping) {
 		this.comBookKeeping = comBookKeeping;
 	}
+
 }
