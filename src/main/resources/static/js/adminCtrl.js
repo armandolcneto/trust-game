@@ -39,7 +39,8 @@ app.controller('adminCtrl', function($scope,$http,$location) {
 									nome: jogo.nome,
 									tipoJogo: jogo.tipoJogo,
 									perfil : perfil.id,
-									tipoPerfil : perfil.tipoPerfil
+									tipoPerfil : perfil.tipoPerfil,
+									book : perfil.comBookKeeping
 									};
 							$scope.jogosCadastrados.push(jogos);
 						}
