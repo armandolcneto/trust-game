@@ -49,6 +49,8 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	
 	$scope.generateOptions = function(value) {
 		var array = [];
+		var i = 0;
+		array.push(i);
 		for (var i = 0; i < value; i++) {
 			array.push(i + 1);
 		}
@@ -108,50 +110,52 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 	}
 
 	$scope.sendNameB = function() {
-		$scope.stompClient.send("/app/hello", {}, JSON.stringify({
-			'valorEnviado' : $("#valorEnviadoB").val(),
-			'id_perfil': $scope.idPerfil,
-			'nome' : "Jogador B",
-			'grupo': "B",
-			'destino' : "http://"+window.location.host+"/gerenciador.html/id=5",
-			'book' : $("#bookKepping").val()
-		}));	
 		
-		$scope.saldoAcumuladoB -= parseFloat($("#valorEnviadoB").val());
-		$scope.saldoRodadaB -= parseFloat($("#valorEnviadoB").val());
-		//$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
-		$scope.valorEnviadoA = "Valor Enviado para o Jogador A: R$ "+$("#valorEnviadoB").val()+",00";
-		//Saldo Acumulado de B
-		var jogo = {id : $scope.idJogo, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
-		var dataObj2 = {
-			id : $scope.idPerfil,
-			conifgJofo : jogo,
-			tipoPerfil : $scope.tipoJogador,
-			saldoAcumulado : $scope.saldoAcumuladoB
-		};
-		
-		$http({url : 'http://' + window.location.host + '/saldoAcumulado', method : "POST", data : dataObj2}).
-		success(function(data, status, headers, config) {
-			console.log("deu certo");
-		}).
-		error(function(data, status, headers, config) {
-			console.log("não deu :-(");
-		});
-		
-		if ($scope.round < 20) {
-			$scope.msgsaldoRodada = "Aguarde o envio do jogador A para fazer seu envio!";
-		}else{
+		if ($("#valorEnviadoB").val() != '? undefined:undefined ?' && $("#valorEnviadoB").val() != '? object:null ?'){
+			$scope.stompClient.send("/app/hello", {}, JSON.stringify({
+				'valorEnviado' : $("#valorEnviadoB").val(),
+				'id_perfil': $scope.idPerfil,
+				'nome' : "Jogador B",
+				'grupo': "B",
+				'destino' : "http://"+window.location.host+"/gerenciador.html/id=5",
+				'book' : $("#bookKepping").val()
+			}));	
+			
+			$scope.saldoAcumuladoB -= parseFloat($("#valorEnviadoB").val());
+			$scope.saldoRodadaB -= parseFloat($("#valorEnviadoB").val());
+			//$scope.msgsaldoRodada = "Saldo do "+$scope.round+"º Round: R$ "+$scope.saldoRodadaB+",00";
+			$scope.valorEnviadoA = "Valor Enviado para o Jogador A: $ "+$("#valorEnviadoB").val()+",00";
+			//Saldo Acumulado de B
+			var jogo = {id : $scope.idJogo, tipoJogo : 'S', montante : 10.00, qtdpessoas : 1, mutiplicador : 3, conversaoMoeda : 0.45};
+			var dataObj2 = {
+				id : $scope.idPerfil,
+				conifgJofo : jogo,
+				tipoPerfil : $scope.tipoJogador,
+				saldoAcumulado : $scope.saldoAcumuladoB
+			};
+			
+			$http({url : 'http://' + window.location.host + '/saldoAcumulado', method : "POST", data : dataObj2}).
+			success(function(data, status, headers, config) {
+				console.log("deu certo");
+			}).
+			error(function(data, status, headers, config) {
+				console.log("não deu :-(");
+			});
+			
+			if ($scope.round < 20) {
+				$scope.msgsaldoRodada = "Aguarde o envio do jogador A para fazer seu envio!";
+			}else{
+				$scope.desabilitaBotao = true;
+				$scope.msgsaldoRodada = "Fim do Jogo!";
+				$scope.valorRecebidoA = "Saldo do Jogador B: $"+$scope.saldoAcumuladoB+",00";
+				$scope.valorEnviadoA = "";
+			}
+			
+			$scope.optionsJogador2 = [];
+			
 			$scope.desabilitaBotao = true;
-			$scope.msgsaldoRodada = "Fim do Jogo!";
-			$scope.valorRecebidoA = "Saldo do Jogador B: R$"+$scope.saldoAcumuladoB+",00";
-			$scope.valorEnviadoA = "";
-		}
-		
-		$scope.optionsJogador2 = [];
-		
-		$scope.desabilitaBotao = true;
-		$scope.proxima = true;
-
+			$scope.proxima = true;
+	   }
 	}
 
 	$scope.showGreeting = function(message) {
@@ -172,7 +176,7 @@ angular.module("trustGameApp").controller("gerenciandorCtrl", function($scope, $
 			$scope.optionsJogador2 = [];
 			$scope.optionsJogador2 = $scope.generateOptions(obj.valor);
 			$('#valorEnviadoB').change();
-			$scope.valorRecebidoA = "Valor Recebido pelo o Jogador A: R$ "+obj.valor+",00";
+			$scope.valorRecebidoA = "Valor Recebido pelo o Jogador A: $ "+obj.valor+",00";
 			$scope.proxima = false;
 			$scope.desabilitaBotao = false;
 			//Saldo Acumulado de B

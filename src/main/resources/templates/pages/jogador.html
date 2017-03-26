@@ -32,7 +32,7 @@
 								<label for="ngvalueselect"> Valor a ser repassado para
 									jogador B: </label> <select class="form-control" name="ngvalueselect"
 									ng-model="selectedJogador1" id="valorEnviadoA">
-									<option ng-repeat="option in optionsJogador1" ng-value="option">R$
+									<option ng-repeat="option in optionsJogador1" ng-value="option">$
 										{{option}},00</option>
 								</select>
 							</div>
@@ -109,10 +109,8 @@
 							<button id="sendA" class="btn btn-default" type="submit" ng-disabled="desabilitaBotao">Enviar</button>
 						</div>
 					</div>
-					    <div class="col-md-6" ng-show="msgBook;">
-					            <font color="red"><h4>Apartir dessa rodada utilize o bloco de notas</h4></font>
-					    </div>
 						<div class="col-md-6" ng-show="showBookKeeping();Rodadas;">
+						        <font color="red" ng-show="msgBook;"><h4>A partir deste momento, voc&ecirc; ter&aacute; acesso ao bloco de anota&ccedil;&otilde;es. Nele voc&ecirc; poder&aacute; registrar informa&ccedil;&otilde;es de<br/>sua conveni&ecirc;ncia que lhes apoiar&atilde;o nas decis&otilde;es.</h4></font>
 								<h4>Bloco de Notas</h4>
 								<textarea id="bookKepping" rows="10" style="width:100%"></textarea>
 						</div>
